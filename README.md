@@ -38,7 +38,6 @@ From PowerShell:
 
 ```powershell
 cd D:\NurtureNest
-npm.cmd ci
 npm.cmd run dev
 ```
 
