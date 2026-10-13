@@ -45,10 +45,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser. Use th
 
 What these commands do:
 
-- `npm.cmd ci` installs dependencies exactly from `package-lock.json`.
 - `npm.cmd run dev` starts the local Next.js development server.
-
-For normal daily development, you usually do not need to run `npm.cmd ci` every time. Run it after cloning the project, after dependency changes, or when `node_modules` looks inconsistent.
 
 To stop the development server, press `Ctrl + C` in the terminal where it is running.
 
