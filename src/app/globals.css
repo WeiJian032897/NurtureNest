@@ -42,6 +42,23 @@ body {
   animation: fade-in 900ms ease-out 120ms both;
 }
 
+.premium-card {
+  border: 1px solid #eadfcd;
+  border-radius: 0.5rem;
+  background: #fbf7ef;
+  box-shadow: 0 1px 2px rgb(79 67 48 / 0.05);
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-0.25rem);
+  border-color: #b7c3ad;
+  box-shadow: 0 24px 50px rgb(143 120 88 / 0.16);
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
