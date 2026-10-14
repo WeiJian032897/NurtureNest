@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles } from "lucide-react";
+
 import { navItems } from "@/lib/home-data";
 
 const focusRing =
@@ -16,20 +16,25 @@ export function SiteNavigation() {
       <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-8 lg:px-10">
         <Link
           href="/"
-          className={`group flex items-center gap-3 ${focusRing}`}
+          className={`group flex items-center gap-[14px] ${focusRing}`}
           aria-label="Nurture Nest home"
         >
-          <span className="grid size-10 place-items-center rounded-full bg-[#8fa88b] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-            <Sparkles className="size-5" aria-hidden="true" />
-          </span>
-          <span>
-            <span className="block text-sm font-semibold uppercase tracking-[0.28em] text-[#6d7f68]">
-              Nurture
+          <img
+            src="/images/LogoNurtureNest_v2.jpg"
+            alt=""
+            className="h-12 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="flex flex-col items-start leading-none">
+            <span
+              className="uppercase text-[25px] font-semibold tracking-[0.10em] text-[#2D4130]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              NURTURE NEST
             </span>
-            <span className="block font-serif text-2xl leading-none text-[#2d2a22]">
-              Nest
+            <span className="mt-[6px] text-[0.65rem] font-medium uppercase tracking-[0.18em] text-[#9a9183]">
+              Postnatal Care & Wellness Centre
             </span>
-          </span>
+          </div>
         </Link>
 
         <div className="order-3 flex w-full gap-2 overflow-x-auto pt-2 text-sm font-medium text-[#6e6658] md:order-2 md:w-auto md:items-center md:gap-2 md:overflow-visible md:pt-0">
@@ -71,7 +76,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-[#6e6658] md:flex-row md:items-center md:justify-between">
         <div>
           <p className="font-serif text-2xl text-[#2d2a22]">Nurture Nest</p>
-          <p className="mt-2">Premium confinement centre website concept.</p>
+          <p className="mt-2">Premium postnatal care & wellness centre in Kuala Lumpur.</p>
         </div>
         <div className="flex flex-wrap gap-3">
           {navItems.map((item) => (
