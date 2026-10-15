@@ -38,7 +38,7 @@ From PowerShell:
 
 ```powershell
 cd D:\NurtureNest
-npm.cmd run dev
+npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser. Use the address printed in the terminal if Next.js shows a different port.

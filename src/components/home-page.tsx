@@ -1,29 +1,22 @@
 import {
   Baby,
-  CalendarCheck,
-  Flower2,
+  Check,
   HeartPulse,
-  Hotel,
-  Leaf,
   Moon,
-  Utensils,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import {
-  careValues,
-  packages,
+  accommodationComparison,
+  brandDifferentiation,
+  brandPhilosophy,
+  environmentFacilities,
   rooms,
   services,
   testimonials,
-  valueDetails,
 } from "@/lib/home-data";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
 
-const iconMap = {
-  baby: Baby,
-  heart: HeartPulse,
-  leaf: Leaf,
-};
+const philosophyIcons = [Moon, Baby, HeartPulse];
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
@@ -33,11 +26,12 @@ export function HomePage() {
     <main className="min-h-screen overflow-hidden bg-[#fbf7ef] text-[#2d2a22]">
       <SiteNavigation />
       <HeroSection />
-      <CareValuesSection />
-      <HomeValuesSection />
-      <RoomsSection />
-      <PackagesSection />
-      <ServicesSection />
+      <BrandPhilosophySection />
+      <AccommodationExperienceSection />
+      <CoreServicesSection />
+      <EnvironmentFacilitiesSection />
+      <BrandDifferentiationSection />
+      <FeaturedRoomSection />
       <TestimonialsSection />
       <SiteFooter />
     </main>
@@ -50,24 +44,22 @@ function HeroSection() {
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 py-12 lg:grid-cols-[1fr_0.95fr] lg:py-16">
         <div className="animate-rise max-w-2xl">
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-[#7f967a]">
-            Premium confinement centre concept
+            Premium postnatal care & wellness centre
           </p>
           <h1 className="font-serif text-5xl leading-[1.02] text-[#28251f] sm:text-6xl lg:text-7xl">
-            Restful postpartum care with the grace of boutique hospitality.
+            Every Mother Deserves a Beautiful Beginning.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-[#6e6658]">
-            Nurture Nest is a refined Phase 1 brand website for mothers and newborns,
-            shaped around calm recovery, thoughtful care, and a warm sense of belonging.
+            At Nurture Nest, the first 42 days of motherhood are met with thoughtful care, refined comfort and meaningful family connections.
+            From attentive newborn support to nourishing cuisine and peaceful lakeside moments, every detail is designed to help families
+            embrace this new chapter with greater comfort, confidence and peace of mind.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink
-              href="mailto:cheeweijian2003@gmail.com?subject=Nurture%20Nest%20consultation"
-              variant="primary"
-            >
-              Book a consultation
+            <ButtonLink href="/care" variant="primary">
+              Explore Our Care
             </ButtonLink>
-            <ButtonLink href="#packages" variant="secondary">
-              View example packages
+            <ButtonLink href="/rooms" variant="secondary">
+              Enquire About Your Stay
             </ButtonLink>
           </div>
         </div>
@@ -78,7 +70,7 @@ function HeroSection() {
           </div>
           <SurfaceImage
             label="Mother gently holding her newborn baby"
-            image="https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?auto=format&fit=crop&w=1400&q=85"
+            image="/images/motherHugBaby.jpg"
             className="h-[34rem] rounded-t-full rounded-b-[1.5rem]"
             frameClassName="rounded-t-full rounded-b-[2rem] p-3"
           />
@@ -88,17 +80,17 @@ function HeroSection() {
   );
 }
 
-function CareValuesSection() {
+function BrandPhilosophySection() {
   return (
-    <Section id="values" tone="white">
+    <Section id="philosophy" tone="white">
       <SectionIntro
-        eyebrow="Care values"
-        title="Three principles for a softer beginning."
-        text="The concept avoids unsupported medical claims and focuses on environment, routines, and practical postpartum support."
+        eyebrow="Brand Philosophy"
+        title="A Gentle Beginning, Thoughtfully Nurtured"
+        text="Welcoming a new life is a beautiful beginning, but the weeks that follow deserve just as much care. At Nurture Nest, we believe mothers need space to rest, babies deserve attentive care, and families deserve the time and support to grow together. Through thoughtful postnatal support, a peaceful living environment and meaningful moments of connection, we aim to make the first 42 days a more comfortable and reassuring experience for every family."
       />
       <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {careValues.map((value) => {
-          const Icon = iconMap[value.icon as keyof typeof iconMap];
+        {brandPhilosophy.map((value, index) => {
+          const Icon = philosophyIcons[index % philosophyIcons.length];
 
           return (
             <article key={value.title} className="premium-card group p-7">
@@ -113,61 +105,158 @@ function CareValuesSection() {
   );
 }
 
-function HomeValuesSection() {
+function AccommodationExperienceSection() {
   return (
-    <Section id="home-values" tone="sage">
-      <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-        <div className="sticky top-28">
-          <SectionIntro
-            eyebrow="Home values"
-            title="The emotional foundation of Nurture Nest."
-            text="These values stay on the Home page as brand storytelling. Rooms, Packages, Care, and FAQ can expand into dedicated pages as the website grows."
-          />
+    <Section id="rooms">
+      <SectionIntro
+        eyebrow="Accommodation Experience"
+        title="Your Private Sanctuary"
+        text="Designed for comfort, privacy and peaceful moments, our thoughtfully appointed rooms offer a welcoming retreat for mothers and their little ones. From restful interiors to considered everyday essentials, every space is envisioned to make the first 42 days feel a little more comfortable."
+      />
+
+      <div className="mt-12 grid gap-8 lg:grid-cols-3">
+        {rooms.map((room) => (
+          <article
+            key={room.name}
+            className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl shadow-[#d9ccb6]/25 transition duration-300 hover:-translate-y-1"
+          >
+            <SurfaceImage
+              label={`${room.name} room`}
+              image={room.image}
+              className="h-96"
+              frameClassName="rounded-none border-0 p-0 shadow-none"
+            />
+            <div className="flex flex-1 flex-col p-7">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#7f967a]">
+                  {room.eyebrow}
+                </p>
+                <span className="text-[#c8b99f]" aria-hidden="true">·</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#9a9183]">
+                  {room.tag}
+                </p>
+              </div>
+              <h3 className="mt-3 font-serif text-3xl text-[#2d2a22]">{room.name}</h3>
+              <p className="mt-3 leading-7 text-[#6e6658]">{room.description}</p>
+
+              <div className="mt-5 border-t border-[#e8ddca] pt-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7f967a]">
+                  Features
+                </p>
+                <ul className="mt-3 space-y-2 text-sm leading-6 text-[#5f5749]">
+                  {room.features.map((feature) => (
+                    <li key={feature} className="flex gap-3">
+                      <span className="mt-[0.45rem] size-1.5 shrink-0 rounded-full bg-[#8fa88b]" aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-5 border-t border-[#e8ddca] pt-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7f967a]">
+                  Design Concept
+                </p>
+                <p className="mt-2 text-sm italic leading-6 text-[#6e6658]">
+                  {room.designConcept}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-16">
+        <div className="mb-6 flex items-center gap-3">
+          <span className="h-px w-8 bg-[#8fa88b]" aria-hidden="true" />
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#7f967a]">
+            Designed for Mother & Baby
+          </p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          {valueDetails.map((value) => (
-            <article key={value.label} className="rounded-lg border border-[#c9d4c1] bg-white/75 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-[#cbd6c3]/40">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#7f967a]">
-                {value.label}
-              </p>
-              <h3 className="mt-4 font-serif text-2xl leading-tight text-[#2d2a22]">
-                {value.title}
-              </h3>
-              <p className="mt-4 leading-7 text-[#6e6658]">{value.text}</p>
-            </article>
-          ))}
+        <div className="overflow-hidden rounded-2xl border border-[#e8ddca] bg-white shadow-xl shadow-[#d9ccb6]/30">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="bg-[#2f4431] text-white">
+                <th className="w-[22%] px-6 py-5 text-sm font-semibold uppercase tracking-[0.18em]">
+                  Design Dimension
+                </th>
+                <th className="w-[39%] px-6 py-5 text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
+                  Standard Boutique Hotel
+                </th>
+                <th className="w-[39%] bg-[#3a523c] px-6 py-5 text-sm font-semibold uppercase tracking-[0.18em]">
+                  The Nurture Nest Advantage
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {accommodationComparison.map((row, index) => (
+                <tr
+                  key={row.dimension}
+                  className={`transition-colors hover:bg-[#f6f1e7] ${
+                    index % 2 === 0 ? "bg-[#fbf7ef]" : "bg-white"
+                  }`}
+                >
+                  <td className="border-t border-[#e8ddca] px-6 py-5 align-top text-sm font-semibold text-[#2f4431]">
+                    {row.dimension}
+                  </td>
+                  <td className="border-t border-[#e8ddca] px-6 py-5 align-top text-sm leading-6 text-[#8a8172]">
+                    {row.standard}
+                  </td>
+                  <td className="border-t border-[#e8ddca] bg-[#f3f6ee] px-6 py-5 align-top text-sm leading-6 text-[#2d4130]">
+                    <span className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 size-4 shrink-0 text-[#6f866b]" aria-hidden="true" />
+                      <span>{row.nurture}</span>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <ButtonLink href="/rooms" variant="primary">
+          Explore Our Rooms
+        </ButtonLink>
       </div>
     </Section>
   );
 }
 
-function RoomsSection() {
+function CoreServicesSection() {
   return (
-    <Section id="rooms">
+    <Section id="care" tone="sage">
       <SectionIntro
-        eyebrow="Rooms and facilities"
-        title="Editorial spaces designed for privacy, pause, and care."
-        text="Use these as concept placeholders until licensed photography and confirmed facility details are available."
+        eyebrow="Core Services"
+        title="Care That Goes Beyond Comfort"
+        text="A thoughtful blend of maternal support, newborn care, nourishing cuisine and personalised wellness—each designed to meet families where they are during the first 42 days."
       />
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
-        {rooms.map((room, index) => (
+      <div className="mt-12 grid gap-6 grid-cols-2 lg:grid-cols-4">
+        {services.map((service) => (
           <article
-            key={room.name}
-            className={`overflow-hidden rounded-lg bg-white shadow-xl shadow-[#d9ccb6]/25 transition duration-300 hover:-translate-y-1 ${index === 0 ? "lg:col-span-2" : ""}`}
+            key={service.title}
+            className="group overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#cbd6c3]/40"
           >
-            <SurfaceImage
-              label={`${room.name} concept photography`}
-              image={room.image}
-              className={index === 0 ? "h-96" : "h-80"}
-              frameClassName="rounded-none border-0 p-0 shadow-none"
-            />
+            <div className="relative">
+              <SurfaceImage
+                label={`${service.title} service`}
+                image={service.image}
+                className="h-80"
+                frameClassName="rounded-none border-0 p-0 shadow-none"
+              />
+              <div className="absolute left-5 top-5 flex items-center gap-3">
+                <span className="grid size-11 place-items-center rounded-full bg-[#2f4431]/90 font-serif text-lg text-white backdrop-blur-sm">
+                  {service.number}
+                </span>
+                <span className="rounded-full bg-white/85 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#2f4431] backdrop-blur-sm">
+                  {service.category}
+                </span>
+              </div>
+            </div>
             <div className="p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#7f967a]">
-                {room.eyebrow}
-              </p>
-              <h3 className="mt-3 font-serif text-3xl text-[#2d2a22]">{room.name}</h3>
-              <p className="mt-3 leading-7 text-[#6e6658]">{room.detail}</p>
+              <h3 className="font-serif text-2xl text-[#2d2a22]">{service.title}</h3>
+              <p className="mt-3 leading-7 text-[#6e6658]">{service.text}</p>
             </div>
           </article>
         ))}
@@ -176,52 +265,42 @@ function RoomsSection() {
   );
 }
 
-function PackagesSection() {
+function EnvironmentFacilitiesSection() {
   return (
-    <Section id="packages" tone="sage">
-      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-        <SectionIntro
-          eyebrow="Example packages"
-          title="Illustrative stay options for early planning."
-          text="Prices are demo examples for Phase 1 and must be reviewed before any real enquiry or sales use."
-        />
-        <p className="max-w-sm rounded-lg border border-[#c5d0bd] bg-white/70 p-4 text-sm leading-6 text-[#5f6757]">
-          Example pricing only. Final inclusions, care scope, taxes, and availability are not configured.
-        </p>
-      </div>
+    <Section id="environment" tone="cream">
+      <SectionIntro
+        eyebrow="Environment and Facilities"
+        title="Room to Rest, Space to Reconnect"
+        text="A thoughtful stay is shaped by more than the room itself. From quiet moments of rest to meaningful time with loved ones, the environment should offer space to slow down and settle into a new chapter of family life."
+      />
 
-      <div className="mt-12 grid gap-5 lg:grid-cols-3">
-        {packages.map((item) => (
+      <div className="mt-12 flex flex-col gap-8">
+        <div className="overflow-hidden rounded-2xl shadow-xl shadow-[#b9aa8f]/20">
+          <SurfaceImage
+            label="Nurture Nest environment and facilities"
+            image={environmentFacilities.heroImage}
+            className="h-[34rem]"
+            frameClassName="rounded-none border-0 p-0 shadow-none"
+          />
+        </div>
+
+        {environmentFacilities.spaces.map((space) => (
           <article
-            key={item.name}
-            className={`rounded-lg border p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl ${
-              item.featured
-                ? "border-[#2f4431] bg-[#2f4431] text-white shadow-[#8fa88b]/30"
-                : "border-[#d8cbb8] bg-white/85 text-[#2d2a22] shadow-[#ded2c0]/25"
-            }`}
+            key={space.title}
+            className="group flex flex-col overflow-hidden rounded-2xl border border-[#e8ddca] bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#d9ccb6]/30 sm:flex-row"
           >
-            <p
-              className={`text-xs font-semibold uppercase tracking-[0.25em] ${
-                item.featured ? "text-[#d8c5ad]" : "text-[#7f967a]"
-              }`}
-            >
-              {item.duration}
-            </p>
-            <h3 className="mt-4 font-serif text-3xl">{item.name}</h3>
-            <p className={`mt-3 text-2xl font-semibold ${item.featured ? "text-[#fbf7ef]" : "text-[#2f4431]"}`}>
-              {item.price}
-            </p>
-            <p className={`mt-5 leading-7 ${item.featured ? "text-[#f3eadf]" : "text-[#6e6658]"}`}>
-              {item.summary}
-            </p>
-            <ul className="mt-6 space-y-3 text-sm">
-              {item.inclusions.map((inclusion) => (
-                <li key={inclusion} className="flex gap-3">
-                  <CalendarCheck className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                  <span>{inclusion}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="w-full overflow-hidden sm:w-1/3">
+              <SurfaceImage
+                label={space.title}
+                image={space.image}
+                className="h-64 sm:h-full min-h-[12rem]"
+                frameClassName="rounded-none border-0 p-0 shadow-none"
+              />
+            </div>
+            <div className="flex flex-col justify-center p-8 sm:w-2/3">
+              <h3 className="font-serif text-2xl text-[#2d2a22] sm:text-3xl">{space.title}</h3>
+              <p className="mt-3 text-base leading-7 text-[#6e6658]">{space.text}</p>
+            </div>
           </article>
         ))}
       </div>
@@ -229,42 +308,113 @@ function PackagesSection() {
   );
 }
 
-function ServicesSection() {
+function BrandDifferentiationSection() {
   return (
-    <Section id="care" tone="white">
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <SectionIntro
-            eyebrow="Mother and newborn care"
-            title="A service language built around reassurance, not pressure."
-            text="Phase 1 presents care categories at a brand level only. Specific clinical protocols should be confirmed by qualified operators before publication."
-          />
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/faq" variant="secondary">
-              Read FAQ
-            </ButtonLink>
-            <ButtonLink
-              href="mailto:cheeweijian2003@gmail.com?subject=Nurture%20Nest%20care%20question"
-              variant="primary"
-            >
-              Ask a question
-            </ButtonLink>
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {services.map((service, index) => {
-            const icons = [Moon, Utensils, Baby, HeartPulse, Hotel, Flower2];
-            const Icon = icons[index % icons.length];
+    <Section id="difference" tone="sage">
+      <div className="mx-auto max-w-3xl">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#7f967a]">
+          Brand Differentiation
+        </p>
+        <h2 className="font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">
+          The Nurture Nest Difference
+        </h2>
+        <p className="mt-5 text-lg leading-8 text-[#6e6658]">
+          We believe the early days of motherhood deserve thoughtful attention in every detail. Our vision brings together the warmth of family life, the comfort of considered spaces and a more personal approach to the postnatal stay.
+        </p>
+      </div>
 
-            return (
-              <div key={service} className="flex items-center gap-4 rounded-lg bg-[#fbf7ef] p-5 shadow-sm">
-                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-[#8fa88b] text-white">
-                  <Icon className="size-5" aria-hidden="true" />
-                </span>
-                <p className="font-medium text-[#3f3a30]">{service}</p>
+      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {brandDifferentiation.map((item, index) => (
+          <article
+            key={item.title}
+            className="group relative flex flex-col rounded-2xl border border-[#c9d4c1] bg-white/80 p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-[#cbd6c3]/40"
+          >
+            <span className="font-serif text-5xl text-[#8fa88b]/40" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <h3 className="mt-4 font-serif text-2xl leading-snug text-[#2d2a22]">
+              {item.title}
+            </h3>
+            <p className="mt-3 leading-7 text-[#6e6658]">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function FeaturedRoomSection() {
+  const featuredRoom = {
+    eyebrow: "Our Featured Room",
+    name: "Deluxe Room",
+    tagline: "A beautiful balance of comfort and practicality.",
+    features: [
+      "Refined, calming interiors",
+      "A comfortable space where a new mother can relax, recover, and restore her vitality after childbirth.",
+      "Professional 24-hour infant care",
+      "Thoughtful room layout for everyday family needs",
+      "Includes a variety of nutritious breakfast, lunch, afternoon tea, and dinner options, thoughtfully designed for pregnant women, baby, and their families.",
+    ],
+    price: "RM 49,999",
+    priceNote: "tax included",
+    duration: "42 days in total",
+    image: "/images/unused2.jpg",
+  };
+
+  return (
+    <Section id="featured-room" tone="white">
+      <SectionIntro
+        eyebrow="Best Selling Room Package"
+        title="Your Most Welcoming Beginning"
+        text="A refined and welcoming private space designed around the comfort of mothers, the needs of newborns and the little moments that make a family feel at home."
+      />
+
+      <div className="mt-12 overflow-hidden rounded-3xl border border-[#e8ddca] bg-[#fbf7ef] shadow-2xl shadow-[#b9aa8f]/25">
+        <div className="grid lg:grid-cols-2">
+          <div className="relative min-h-[22rem] lg:min-h-[40rem]">
+            <SurfaceImage
+              label={`${featuredRoom.name} featured room`}
+              image={featuredRoom.image}
+              className="h-full min-h-[22rem] lg:min-h-[40rem]"
+              frameClassName="rounded-none border-0 p-0 shadow-none"
+            />
+          </div>
+
+          <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#7f967a]">
+              {featuredRoom.eyebrow}
+            </p>
+            <h3 className="mt-4 font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">
+              {featuredRoom.name}
+            </h3>
+            <p className="mt-4 text-lg leading-8 text-[#6e6658]">
+              {featuredRoom.tagline}
+            </p>
+
+            <ul className="mt-8 space-y-4">
+              {featuredRoom.features.map((feature) => (
+                <li key={feature} className="flex gap-3 text-sm leading-7 text-[#5f5749]">
+                  <Check className="mt-1 size-4 shrink-0 text-[#6f866b]" aria-hidden="true" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex flex-col gap-1 border-t border-[#e8ddca] pt-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="font-serif text-3xl text-[#2f4431]">{featuredRoom.price}</p>
+                <p className="mt-1 text-sm text-[#6e6658]">
+                  {featuredRoom.priceNote} · {featuredRoom.duration}
+                </p>
               </div>
-            );
-          })}
+            </div>
+
+            <div className="mt-8">
+              <ButtonLink href="/packages" variant="primary">
+                Explore Our Packages
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </div>
     </Section>
@@ -273,9 +423,9 @@ function ServicesSection() {
 
 function TestimonialsSection() {
   return (
-    <Section id="testimonials">
+    <Section id="testimonials" tone="white">
       <SectionIntro
-        eyebrow="Demo testimonials"
+        eyebrow="Testimonials & Review"
         title="A tone sample for future approved family stories."
         text="These quotes are fictional demo content only and are intentionally labelled that way."
       />

@@ -6,71 +6,181 @@ export const navItems = [
   { label: "FAQ", href: "/faq" },
 ];
 
-export const careValues = [
+export const brandPhilosophy = [
   {
-    icon: "heart",
-    title: "Gentle recovery",
-    text: "A restful setting for mothers to slow down, regain strength, and feel supported during the early postpartum weeks.",
+    title: "Rest & Recovery",
+    text: "A peaceful space for mothers to rest, recover and adjust to the rhythms of early motherhood.",
   },
   {
-    icon: "baby",
-    title: "Newborn confidence",
-    text: "Practical guidance for soothing, feeding rhythms, and everyday newborn care without overwhelming new parents.",
+    title: "Attentive Newborn Care",
+    text: "Thoughtful newborn care and practical guidance to help parents feel more supported as they learn and grow with their baby.",
   },
   {
-    icon: "leaf",
-    title: "Nourished routines",
-    text: "Warm meals, calm rituals, and thoughtful spaces shaped around comfort rather than clinical intensity.",
-  },
-];
-
-export const valueDetails = [
-  {
-    label: "Privacy",
-    title: "A quiet setting for new family rhythms.",
-    text: "The brand experience emphasizes personal space, gentle transitions, and calm routines for the first weeks after birth.",
-  },
-  {
-    label: "Warmth",
-    title: "Hospitality that feels human, not clinical.",
-    text: "Soft interiors, thoughtful meals, and welcoming service language help families feel cared for from arrival to enquiry.",
-  },
-  {
-    label: "Confidence",
-    title: "Support that helps parents feel steady.",
-    text: "Education-led care language focuses on practical reassurance, newborn routines, and parent confidence without making unsupported claims.",
-  },
-  {
-    label: "Respect",
-    title: "A mother-led pace for recovery.",
-    text: "The experience is framed around consent, comfort, and flexible support rather than rigid pressure or one-size-fits-all promises.",
+    title: "Meaningful Connections",
+    text: "Space for families to bond, share meaningful moments and embrace a new chapter together.",
   },
 ];
 
 export const rooms = [
   {
-    name: "Serene Suite",
-    image:
-      "/images/serene-suite.jpg",
-    eyebrow: "Private recovery",
-    detail:
-      "A quiet suite concept with soft light, a nursing lounge, and room for family connection.",
+    name: "Deluxe Room",
+    image: "/images/serene-suite.jpg",
+    eyebrow: "Comfortable & Practical",
+    tag: "Entry-Level Room",
+    description:
+      "Offering a refined, practical private space for families who value comfort and a quiet environment.",
+    features: [
+      "Comfortable large bed with bedside lighting",
+      "Chair for nursing or feeding",
+      "Private bathroom",
+      "Wardrobe, luggage storage, and storage space for baby essentials",
+      "Bedside space suitable for daily care",
+    ],
+    designConcept:
+      "Minimalist, warm, and practical. A complete, comfortable experience—even in the entry-level room category.",
   },
   {
-    name: "Garden Lounge",
-    image:
-      "/images/garden-lounge.jpg",
-    eyebrow: "Shared calm",
-    detail:
-      "A boutique hospitality-inspired common space for tea, reading, and unhurried conversation.",
+    name: "Premier Room",
+    image: "/images/PremierRoom.jpg",
+    eyebrow: "More Space and Comfort",
+    tag: "Elevated Experience",
+    description:
+      "Designed for families seeking greater spaciousness, a comfortable relaxation area, and enhanced privacy.",
+    features: [
+      "More spacious sleeping and activity areas",
+      "A separate or semi-separate relaxation nook",
+      "Ample storage and shelving space",
+      "Seating to accommodate a companion",
+      "Superior natural light, views, or spatial layout (depending on the specific design)",
+    ],
+    designConcept:
+      "Evoking the feel of a boutique hotel suite, with the added value reflected in tangible space or amenities.",
   },
   {
-    name: "Newborn Nest",
-    image:
-      "/images/baby1.jpg",
-    eyebrow: "Baby care",
-    detail:
-      "A warm, orderly care room concept for newborn routines and parent learning moments.",
+    name: "Signature Suite",
+    image: "/images/signatureSuite.jpg",
+    eyebrow: "Spacious & Private",
+    tag: "Premium Accommodation",
+    description:
+      "A more spacious suite designed for families who value personal space, the presence of a partner, and a comprehensive living experience.",
+    features: [
+      "Larger living area",
+      "Separate living room or clearly defined relaxation zone",
+      "Layout conducive to extended stays with a partner",
+      "Ample space for baby care and storage",
+      "Option for a separate dining area or enhanced views",
+    ],
+    designConcept:
+      "Quiet, private, and refined. The focus is on adapting the space to family life rather than simply pursuing lavish décor.",
+  },
+];
+
+export const accommodationComparison = [
+  {
+    dimension: "Sleep",
+    standard: "Prioritizing traveler comfort",
+    nurture: "Balancing the mother's need for rest with the baby's care requirements",
+  },
+  {
+    dimension: "Seating",
+    standard: "Standard lounge chair",
+    nurture: "Chair suitable for feeding, holding the baby, and keeping the baby company",
+  },
+  {
+    dimension: "Storage",
+    standard: "Luggage & Clothing",
+    nurture: "Added storage for baby clothes, diapers, and care supplies",
+  },
+  {
+    dimension: "Bathroom",
+    standard: "Prioritizes aesthetics and convenience",
+    nurture: "Focuses on ease of use, lighting, and safety features such as slip resistance",
+  },
+  {
+    dimension: "Family Companionship",
+    standard: "For short-term travelers",
+    nurture: "Space for a partner or an approved family member to accompany the traveler",
+  },
+  {
+    dimension: "Privacy",
+    standard: "Accommodation privacy",
+    nurture: "Balancing visitor management with the privacy of mother and baby",
+  },
+  {
+    dimension: "Service Contact",
+    standard: "General Room Service",
+    nurture: "Specific staff contact details can be configured",
+  },
+];
+
+export const services = [
+  {
+    number: "01",
+    category: "MATERNAL CARE",
+    title: "Maternal Postnatal Support",
+    image: "/images/maternalCare.jpg",
+    text: "Thoughtful support for the early days of motherhood, with an emphasis on rest, everyday comfort and a more supported transition into family life.",
+  },
+  {
+    number: "02",
+    category: "NEWBORN CARE",
+    title: "Newborn Care",
+    image: "/images/newBorn.jpg",
+    text: "Gentle, attentive care for your little one, designed to help families feel more supported as they settle into life with a newborn.",
+  },
+  {
+    number: "03",
+    category: "NOURISHING CUISINE",
+    title: "Nourishing Cuisine",
+    image: "/images/nourishCuisine.jpg",
+    text: "Thoughtfully prepared meals bring warmth and a sense of routine to each day, making everyday dining another part of a considered stay.",
+  },
+  {
+    number: "04",
+    category: "PERSONALISED WELLNESS",
+    title: "Personalised Wellness",
+    image: "/images/personalWellness.jpg",
+    text: "A more personal approach to everyday wellbeing, with thoughtful touches that help each family find a comfortable rhythm during their stay.",
+  },
+];
+
+export const environmentFacilities = {
+  heroImage: "/images/EnvironmentandFacilities.jpg",
+  spaces: [
+    {
+      title: "Lakeside & Gardens",
+      image: "/images/lakeside.jpg",
+      text: "Lakeside, gardens and outdoor areas for quiet moments of rest and fresh air.",
+    },
+    {
+      title: "Quiet Retreats",
+      image: "/images/retreats.jpg",
+      text: "Indoor lounges, reading corners and common spaces designed for calm and reflection.",
+    },
+    {
+      title: "Space for Family",
+      image: "/images/familySpace.jpg",
+      text: "Welcoming areas where families can spend time together, talk and rest as one.",
+    },
+  ],
+};
+
+export const brandDifferentiation = [
+  {
+    title: "Care, Considered Personally",
+    text: "A more attentive approach shaped around the needs and preferences of each family.",
+  },
+  {
+    title: "Privacy with Peace of Mind",
+    text: "A stay designed to value personal space, comfort and the importance of family privacy.",
+  },
+  {
+    title: "Hospitality, Thoughtfully Refined",
+    text: "Boutique-inspired accommodation that balances refined surroundings with practical family needs.",
+  },
+  {
+    title: "Family at the Heart",
+    text: "Making room for family connection as parents and their little one begin a new chapter together.",
   },
 ];
 
@@ -100,15 +210,6 @@ export const packages = [
       "A premium concept for families who want more space, privacy, and hospitality touches.",
     inclusions: ["Larger suite concept", "Family visiting lounge", "Priority consultation planning"],
   },
-];
-
-export const services = [
-  "Postpartum rest planning",
-  "Newborn care guidance",
-  "Confinement meal coordination",
-  "Feeding and soothing support",
-  "Laundry and room refresh concept",
-  "Family consultation touchpoints",
 ];
 
 export const testimonials = [
