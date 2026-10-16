@@ -206,4 +206,20 @@ export const testimonials = [
     name: "Amanda & Jason · New parents",
     note: "⭐️⭐️⭐️⭐️⭐️",
   },
+
+  {
+    topic: "A little more ease in those precious early days.",
+    quote:
+      "The first few weeks with our baby were filled with so many new experiences. Having a comfortable, thoughtfully prepared space made it easier for us to slow down, spend time together and appreciate the little moments that mattered most. It was the kind of environment we hoped for as new parents.",
+    name: "Sophia R · Mother of twins",
+    note: "⭐️⭐️⭐️⭐️⭐️",
+  },
+
+   {
+    topic: "Thoughtful care, from the very beginning.",
+    quote:
+      "What we appreciated most was the feeling of being able to focus on our growing family without worrying about every little detail. The peaceful atmosphere and attention to comfort made the experience feel personal and reassuring. It gave us more space to enjoy this special chapter together.",
+    name: "Ethan & Chloe · New Parents",
+    note: "⭐️⭐️⭐️⭐️⭐️",
+  }
 ];
