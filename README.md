@@ -2,9 +2,49 @@
 
 ## Project Overview
 
-NURTURE NEST is a Next.js application in an early project state.
+NURTURE NEST is a Next.js (App Router) marketing website for a premium postnatal care & wellness centre in Kuala Lumpur.
 
-TODO: Add the confirmed product purpose and business scope. The current app code still contains the default starter page, so the exact business functionality is not yet defined in code.
+This repository currently focuses on front-end presentation (brand story, room experience, services, facilities, and FAQ). It is not connected to a booking, payment, CRM, or CMS system.
+
+## Pages & Features
+
+### Pages
+
+- `/` (Home)
+  - Hero
+  - Brand Philosophy
+  - Accommodation Experience (3 room cards, refined image hover on image area only)
+  - Core Services
+  - Environment & Facilities
+  - Brand Differentiation
+  - Featured Room (Best Selling Room Package)
+  - Testimonials & Review
+- `/faq` (Frequently Asked Questions)
+  - Topic highlights
+  - FAQ accordion list
+  - Enquiry CTA (mailto link)
+
+### Implementation Status
+
+#### Implemented (UI / Presentation)
+
+- Responsive site navigation + footer
+- Home page sections listed above (static content, local assets)
+- Image hover interaction on the 3 Accommodation Experience room images (subtle scale with smooth easing)
+- FAQ page layout, topic cards, and accordion interactions
+- Enquiry links via `mailto:`
+- Favicon configured to use the Nurture Nest logo image
+
+#### Demo / Placeholder Content (No backend wiring)
+
+- Testimonials, star ratings, and pricing/inclusions are presentation content only (not connected to sales/booking logic)
+- No real availability, package configuration, checkout, or enquiry workflow is implemented
+
+#### Not Implemented Yet
+
+- Route pages referenced by nav/buttons: `/rooms`, `/care`, `/packages`
+- Form submission endpoints (e.g., enquiry forms), authentication, payments, or admin tooling
+- CMS/content management, analytics, and production SEO beyond basic metadata
 
 ## Tech Stack
 
@@ -17,7 +57,7 @@ TODO: Add the confirmed product purpose and business scope. The current app code
 | ESLint | Code quality checks using `eslint-config-next` |
 | Node.js | JavaScript runtime for development tools and builds |
 | npm | Dependency installation and script runner |
-| Firebase 12.18.0 | Installed dependency; TODO: confirm actual app usage before documenting Firebase features |
+| Firebase 12.18.0 | Installed dependency (currently not wired into any app flows) |
 
 Firebase is currently listed in `package.json`, but no Firebase code, Firebase environment variables, `firebase-admin`, or `server-only` usage was found in the source files at the time this README was updated.
 
@@ -36,14 +76,16 @@ From PowerShell:
 
 ```powershell
 cd D:\NurtureNest
-npm run dev
+npm.cmd install
+npm.cmd run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser. Use the address printed in the terminal if Next.js shows a different port.
 
 What these commands do:
 
-- `npm run dev` starts the local Next.js development server.
+- `npm.cmd install` installs dependencies.
+- `npm.cmd run dev` starts the local Next.js development server.
 
 To stop the development server, press `Ctrl + C` in the terminal where it is running.
 
@@ -71,6 +113,8 @@ A successful production build means the app can compile. It does not prove that 
 | `src/app/page.tsx` | Current home page |
 | `src/app/layout.tsx` | Root layout, metadata, and font setup |
 | `src/app/globals.css` | Global CSS and Tailwind import |
+| `src/components/` | Shared UI sections/components (e.g. homepage sections, navigation) |
+| `src/lib/` | Content/data modules for sections (e.g. rooms, services, FAQs) |
 | `public/` | Static assets served from the site root |
 | `next.config.ts` | Next.js configuration |
 | `tsconfig.json` | TypeScript configuration and `@/*` path alias |
