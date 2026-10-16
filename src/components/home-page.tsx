@@ -425,9 +425,10 @@ function TestimonialsSection() {
   return (
     <Section id="testimonials" tone="white">
       <SectionIntro
-        eyebrow="Testimonials & Review"
-        title="A tone sample for future approved family stories."
-        text="These quotes are fictional demo content only and are intentionally labelled that way."
+        eyebrow="KIND WORDS FROM OUR FAMILIES"
+        title="A Beautiful Beginning, Shared."
+        text="Every family's journey into parenthood is unique. We're honoured to be part of these precious first moments, 
+        creating a space where new parents can find comfort, feel supported, and embrace the joy of growing together."
       />
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {testimonials.map((item) => (

@@ -184,51 +184,26 @@ export const brandDifferentiation = [
   },
 ];
 
-export const packages = [
-  {
-    name: "Nest Essential",
-    price: "From RM 8,800",
-    duration: "Example 14-day stay",
-    summary:
-      "A simple, restorative stay for mothers who want privacy, meals, and daily support.",
-    inclusions: ["Private room concept", "Confinement meals", "Daily mother and baby check-ins"],
-  },
-  {
-    name: "Nest Signature",
-    price: "From RM 16,800",
-    duration: "Example 28-day stay",
-    summary:
-      "A fuller boutique care experience with expanded comfort rituals and guided routines.",
-    inclusions: ["Suite room concept", "Meal and wellness planning", "Newborn routine guidance"],
-    featured: true,
-  },
-  {
-    name: "Nest Luxe",
-    price: "From RM 24,800",
-    duration: "Example 28-day premium stay",
-    summary:
-      "A premium concept for families who want more space, privacy, and hospitality touches.",
-    inclusions: ["Larger suite concept", "Family visiting lounge", "Priority consultation planning"],
-  },
-];
-
 export const testimonials = [
   {
+    topic: "A peaceful place to find our rhythm.",
     quote:
-      "The experience felt calm, private, and beautifully considered from the first consultation.",
-    name: "Demo mother A",
-    note: "Fictional demo testimonial",
+      "The calm surroundings and thoughtful details made the idea of settling into life with our newborn feel less overwhelming. It felt important to have a space where our little family could focus on this new chapter.",
+    name: "Michelle T · Mother",
+    note: "⭐️⭐️⭐️⭐️⭐️",
   },
   {
+    topic: "Comfort that feels considered",
     quote:
-      "The brand direction gives the centre a warm hospitality feel without losing the maternal care focus.",
-    name: "Demo family B",
-    note: "Fictional demo testimonial",
+      "What stood out to me was the balance between an elegant environment and the practical needs of a growing family. The experience we envisioned was not just about a beautiful room, but about feeling comfortable ",
+    name: "Daniel L · Father",
+    note: "⭐️⭐️⭐️⭐️",
   },
   {
+    topic: "A meaningful beginning for our family.",
     quote:
-      "A refined concept that makes postpartum support feel less intimidating and more human.",
-    name: "Demo parent C",
-    note: "Fictional demo testimonial",
+      "Those early days with a newborn bring so many changes. We wanted an environment that felt private, warm and welcoming, with room for us to settle into our new routine together.",
+    name: "Amanda & Jason ·New parents",
+    note: "⭐️⭐️⭐️⭐️⭐️",
   },
 ];

@@ -45,7 +45,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser. Use th
 
 What these commands do:
 
-- `npm.cmd run dev` starts the local Next.js development server.
+- `npm run dev` starts the local Next.js development server.
 
 To stop the development server, press `Ctrl + C` in the terminal where it is running.
 
