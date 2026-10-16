@@ -362,14 +362,14 @@ function FeaturedRoomSection() {
   };
 
   return (
-    <Section id="featured-room" tone="white">
+    <Section id="featured-room" tone="cream">
       <SectionIntro
         eyebrow="Best Selling Room Package"
         title="Your Most Welcoming Beginning"
         text="A refined and welcoming private space designed around the comfort of mothers, the needs of newborns and the little moments that make a family feel at home."
       />
 
-      <div className="mt-12 overflow-hidden rounded-3xl border border-[#e8ddca] bg-[#fbf7ef] shadow-2xl shadow-[#b9aa8f]/25">
+      <div className="mt-12 overflow-hidden rounded-3xl border border-[#e8ddca] bg-white shadow-2xl shadow-[#b9aa8f]/25">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[22rem] lg:min-h-[40rem]">
             <SurfaceImage
@@ -433,12 +433,17 @@ function TestimonialsSection() {
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {testimonials.map((item) => (
           <figure key={item.name} className="premium-card p-7">
-            <blockquote className="font-serif text-2xl leading-9 text-[#2d2a22]">
+            <p className="text-sm tracking-[0.15em]" aria-label="Star rating">
+              {item.note}
+            </p>
+            <h3 className="mt-4 font-serif text-2xl leading-snug text-[#2d2a22]">
+              {item.topic}
+            </h3>
+            <blockquote className="mt-4 leading-7 text-[#6e6658]">
               <q>{item.quote}</q>
             </blockquote>
-            <figcaption className="mt-8 border-t border-[#e8ddca] pt-5">
+            <figcaption className="mt-6 border-t border-[#e8ddca] pt-5">
               <p className="font-semibold text-[#40563f]">{item.name}</p>
-              <p className="mt-1 text-sm text-[#7a7265]">{item.note}</p>
             </figcaption>
           </figure>
         ))}

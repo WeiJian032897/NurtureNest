@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "Nurture Nest | Premium Confinement Centre",
   description:
     "A refined postpartum care brand experience for mothers and newborns.",
+  icons: {
+    icon: "/images/LogoNurtureNest_v2.jpg",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
