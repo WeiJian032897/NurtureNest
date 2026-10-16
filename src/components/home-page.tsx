@@ -118,13 +118,13 @@ function AccommodationExperienceSection() {
         {rooms.map((room) => (
           <article
             key={room.name}
-            className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl shadow-[#d9ccb6]/25 transition duration-300 hover:-translate-y-1"
+            className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl shadow-[#d9ccb6]/25 transition duration-300"
           >
             <SurfaceImage
               label={`${room.name} room`}
               image={room.image}
-              className="h-96"
-              frameClassName="rounded-none border-0 p-0 shadow-none"
+              className="h-96 transform-gpu transition-transform duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              frameClassName="group rounded-none border-0 p-0 shadow-none"
             />
             <div className="flex flex-1 flex-col p-7">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">

@@ -203,7 +203,7 @@ export const testimonials = [
     topic: "A meaningful beginning for our family.",
     quote:
       "Those early days with a newborn bring so many changes. We wanted an environment that felt private, warm and welcoming, with room for us to settle into our new routine together.",
-    name: "Amanda & Jason ·New parents",
+    name: "Amanda & Jason · New parents",
     note: "⭐️⭐️⭐️⭐️⭐️",
   },
 ];

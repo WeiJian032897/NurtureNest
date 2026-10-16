@@ -30,8 +30,6 @@ Firebase is currently listed in `package.json`, but no Firebase code, Firebase e
 - Git
   - Recommended for version control and checking local changes.
 
-On Windows, prefer `npm.cmd` instead of `npm`.
-
 ## Installation & Development
 
 From PowerShell:
