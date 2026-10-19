@@ -12,9 +12,9 @@ import {
   environmentFacilities,
   rooms,
   services,
-  testimonials,
 } from "@/lib/home-data";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
+import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 
 const philosophyIcons = [Moon, Baby, HeartPulse];
 
@@ -345,7 +345,7 @@ function BrandDifferentiationSection() {
 
 function FeaturedRoomSection() {
   const featuredRoom = {
-    eyebrow: "Our Featured Room",
+    eyebrow: "Our Featured Room In Setapak , Kuala Lumpur",
     name: "Deluxe Room",
     tagline: "A beautiful balance of comfort and practicality.",
     features: [
@@ -430,24 +430,7 @@ function TestimonialsSection() {
         text="Every family's journey into parenthood is unique. We're honoured to be part of these precious first moments, 
         creating a space where new parents can find comfort, feel supported, and embrace the joy of growing together."
       />
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {testimonials.map((item) => (
-          <figure key={item.name} className="premium-card p-7">
-            <p className="text-sm tracking-[0.15em]" aria-label="Star rating">
-              {item.note}
-            </p>
-            <h3 className="mt-4 font-serif text-2xl leading-snug text-[#2d2a22]">
-              {item.topic}
-            </h3>
-            <blockquote className="mt-4 leading-7 text-[#6e6658]">
-              <q>{item.quote}</q>
-            </blockquote>
-            <figcaption className="mt-6 border-t border-[#e8ddca] pt-5">
-              <p className="font-semibold text-[#40563f]">{item.name}</p>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <TestimonialsCarousel />
     </Section>
   );
 }

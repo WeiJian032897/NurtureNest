@@ -3,7 +3,6 @@ import {
   Baby,
   CalendarCheck,
   HeartPulse,
-  Mail,
   ShieldCheck,
   Utensils,
 } from "lucide-react";
@@ -44,7 +43,7 @@ const topics = [
 
 export default function FaqPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#fbf7ef] text-[#2d2a22]">
+    <main className="min-h-screen overflow-clip bg-[#fbf7ef] text-[#2d2a22]">
       <SiteNavigation />
 
       {/* Hero */}
@@ -61,13 +60,6 @@ export default function FaqPage() {
              We understand that welcoming a new baby comes with many questions. At Nurture Nest, we are always happy to help you find the answers you need, 
              so you and your family can feel informed, reassured and confident as you prepare for this beautiful new chapter.
             </p>
-            <a
-              href="mailto:cheeweijian2003@gmail.com?subject=Nurture%20Nest%20enquiry"
-              className={`mt-9 inline-flex h-12 items-center justify-center rounded-full bg-[#2f4431] px-7 text-sm font-semibold text-white shadow-lg shadow-[#6d7f68]/20 transition hover:-translate-y-0.5 hover:bg-[#253827] ${focusRing}`}
-            >
-              <Mail className="mr-2 size-4" aria-hidden="true" />
-              Enquire now
-            </a>
           </div>
 
           <div className="animate-fade rounded-[2rem] border border-[#e8ddca] bg-white/75 p-4 shadow-2xl shadow-[#d9ccb6]/35">
@@ -108,7 +100,7 @@ export default function FaqPage() {
       {/* FAQ List */}
       <section className="px-5 py-24 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr]">
-          <div>
+          <div className="sticky top-[120px] self-start">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#7f967a]">
               Frequently Asked Questions
             </p>
@@ -125,17 +117,20 @@ export default function FaqPage() {
             {faqs.map((faq, index) => (
               <details
                 key={faq.questionEn}
-                className="group rounded-lg border border-[#e1d4c0] bg-white/80 p-5 shadow-sm open:bg-white"
+                className="group rounded-lg border border-[#e1d4c0] bg-white/80 p-5 shadow-sm transition-all duration-[250ms] open:border-l-[3px] open:border-l-[#c5aa70] open:bg-white open:shadow-[0_8px_24px_rgba(60,50,30,0.08)]"
               >
                 <summary
                   className={`flex cursor-pointer list-none items-start justify-between gap-5 font-semibold text-[#2d2a22] ${focusRing}`}
                 >
                   <div>
                     <p className="text-base">
-                      <span className="mr-2 text-[#7f967a]">{index + 1}.</span>
+                      <span className="mr-2 text-[#c5aa70]">{index + 1}.</span>
                       {faq.questionEn}
                     </p>
-                    <p className="mt-1 text-sm font-normal text-[#6e6658]">
+                    <p
+                      className="mt-1 text-base font-normal text-[#6e6658]"
+                      style={{ fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif' }}
+                    >
                       {faq.questionCn}
                     </p>
                   </div>
@@ -144,9 +139,14 @@ export default function FaqPage() {
                     <span className="hidden text-lg leading-none group-open:block">–</span>
                   </span>
                 </summary>
-                <div className="mt-4 space-y-3 leading-7 text-[#6e6658]">
+                <div className="mt-4 space-y-3 leading-[1.7] text-[#5f5749]">
                   <p>{faq.answerEn}</p>
-                  <p className="text-[#7a7265]">{faq.answerCn}</p>
+                  <p
+                    className="text-base"
+                    style={{ fontFamily: '"Noto Sans SC", "PingFang SC", sans-serif' }}
+                  >
+                    {faq.answerCn}
+                  </p>
                 </div>
               </details>
             ))}

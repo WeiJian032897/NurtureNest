@@ -195,30 +195,30 @@ export const testimonials = [
   {
     topic: "Comfort that feels considered",
     quote:
-      "What stood out to me was the balance between an elegant environment and the practical needs of a growing family. The experience we envisioned was not just about a beautiful room, but about feeling comfortable ",
+      "What stood out to me was the balance between an elegant environment and the practical needs of a growing family. The experience we envisioned was not just about a beautiful room, but about feeling comfortable.",
     name: "Daniel L · Father",
-    note: "⭐️⭐️⭐️⭐️",
+    note: "⭐️⭐️⭐️⭐️⭐️",
   },
   {
     topic: "A meaningful beginning for our family.",
     quote:
       "Those early days with a newborn bring so many changes. We wanted an environment that felt private, warm and welcoming, with room for us to settle into our new routine together.",
-    name: "Amanda & Jason · New parents",
+    name: "Amanda & Jason · New Parents",
     note: "⭐️⭐️⭐️⭐️⭐️",
   },
 
   {
     topic: "A little more ease in those precious early days.",
     quote:
-      "The first few weeks with our baby were filled with so many new experiences. Having a comfortable, thoughtfully prepared space made it easier for us to slow down, spend time together and appreciate the little moments that mattered most. It was the kind of environment we hoped for as new parents.",
-    name: "Sophia R · Mother of twins",
+      "Having twins meant those first weeks were a blur. A calm, thoughtfully prepared space made it easier to slow down and simply enjoy the little moments.",
+    name: "Sophia R · Mother of Twins",
     note: "⭐️⭐️⭐️⭐️⭐️",
   },
 
    {
     topic: "Thoughtful care, from the very beginning.",
     quote:
-      "What we appreciated most was the feeling of being able to focus on our growing family without worrying about every little detail. The peaceful atmosphere and attention to comfort made the experience feel personal and reassuring. It gave us more space to enjoy this special chapter together.",
+      "What we appreciated most was being able to focus on our growing family without worrying about every detail. It felt personal and reassuring.",
     name: "Ethan & Chloe · New Parents",
     note: "⭐️⭐️⭐️⭐️⭐️",
   }
