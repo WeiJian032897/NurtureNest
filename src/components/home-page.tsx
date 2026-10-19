@@ -50,7 +50,7 @@ function HeroSection() {
             Every Mother Deserves a Beautiful Beginning.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-[#6e6658]">
-            At Nurture Nest, the first 42 days of motherhood are met with thoughtful care, refined comfort and meaningful family connections.
+            At Jade & Bloom, the first 42 days of motherhood are met with thoughtful care, refined comfort and meaningful family connections.
             From attentive newborn support to nourishing cuisine and peaceful lakeside moments, every detail is designed to help families
             embrace this new chapter with greater comfort, confidence and peace of mind.
           </p>
@@ -85,8 +85,8 @@ function BrandPhilosophySection() {
     <Section id="philosophy" tone="white">
       <SectionIntro
         eyebrow="Brand Philosophy"
-        title="A Gentle Beginning, Thoughtfully Nurtured"
-        text="Welcoming a new life is a beautiful beginning, but the weeks that follow deserve just as much care. At Nurture Nest, we believe mothers need space to rest, babies deserve attentive care, and families deserve the time and support to grow together. Through thoughtful postnatal support, a peaceful living environment and meaningful moments of connection, we aim to make the first 42 days a more comfortable and reassuring experience for every family."
+        title="A Gentle Beginning, Thoughtfully Bloomed"
+        text="Welcoming a new life is a beautiful beginning, but the weeks that follow deserve just as much care. At Jade & Bloom, we believe mothers need space to rest, babies deserve attentive care, and families deserve the time and support to grow together. Through thoughtful postnatal support, a peaceful living environment and meaningful moments of connection, we aim to make the first 42 days a more comfortable and reassuring experience for every family."
       />
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {brandPhilosophy.map((value, index) => {
@@ -184,7 +184,7 @@ function AccommodationExperienceSection() {
                   Standard Boutique Hotel
                 </th>
                 <th className="w-[39%] bg-[#3a523c] px-6 py-5 text-sm font-semibold uppercase tracking-[0.18em]">
-                  The Nurture Nest Advantage
+                  The Jade & Bloom Advantage
                 </th>
               </tr>
             </thead>
@@ -205,7 +205,7 @@ function AccommodationExperienceSection() {
                   <td className="border-t border-[#e8ddca] bg-[#f3f6ee] px-6 py-5 align-top text-sm leading-6 text-[#2d4130]">
                     <span className="flex items-start gap-2.5">
                       <Check className="mt-0.5 size-4 shrink-0 text-[#6f866b]" aria-hidden="true" />
-                      <span>{row.nurture}</span>
+                      <span>{row.jadeAndBloom}</span>
                     </span>
                   </td>
                 </tr>
@@ -277,7 +277,7 @@ function EnvironmentFacilitiesSection() {
       <div className="mt-12 flex flex-col gap-8">
         <div className="overflow-hidden rounded-2xl shadow-xl shadow-[#b9aa8f]/20">
           <SurfaceImage
-            label="Nurture Nest environment and facilities"
+            label="Jade & Bloom environment and facilities"
             image={environmentFacilities.heroImage}
             className="h-[34rem]"
             frameClassName="rounded-none border-0 p-0 shadow-none"
@@ -316,7 +316,7 @@ function BrandDifferentiationSection() {
           Brand Differentiation
         </p>
         <h2 className="font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">
-          The Nurture Nest Difference
+          The Jade & Bloom Difference
         </h2>
         <p className="mt-5 text-lg leading-8 text-[#6e6658]">
           We believe the early days of motherhood deserve thoughtful attention in every detail. Our vision brings together the warmth of family life, the comfort of considered spaces and a more personal approach to the postnatal stay.

@@ -10,9 +10,9 @@ import { faqs } from "@/lib/faq-data";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions | Nurture Nest",
+  title: "Frequently Asked Questions | Jade & Bloom",
   description:
-    "Frequently asked questions about Nurture Nest — a premium postnatal care and wellness centre in Kuala Lumpur.",
+    "Frequently asked questions about Jade & Bloom — a premium postnatal care and wellness centre in Kuala Lumpur.",
 };
 
 const focusRing =
@@ -51,13 +51,13 @@ export default function FaqPage() {
         <div className="mx-auto grid max-w-7xl gap-12 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="animate-rise">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-[#7f967a]">
-              Nurture Nest
+              Jade & Bloom
             </p>
             <h1 className="font-serif text-5xl leading-[1.05] text-[#28251f] sm:text-6xl">
               Everything You Need to Know
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#6e6658]">
-             We understand that welcoming a new baby comes with many questions. At Nurture Nest, we are always happy to help you find the answers you need, 
+             We understand that welcoming a new baby comes with many questions. At Jade & Bloom, we are always happy to help you find the answers you need, 
              so you and your family can feel informed, reassured and confident as you prepare for this beautiful new chapter.
             </p>
           </div>
@@ -108,7 +108,7 @@ export default function FaqPage() {
               Clear answers, refined presentation.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#6e6658]">
-              Everything you need to know about staying at Nurture Nest. Can&apos;t
+              Everything you need to know about staying at Jade & Bloom. Can&apos;t
               find what you&apos;re looking for? Reach out to our team directly.
             </p>
           </div>
@@ -171,10 +171,10 @@ export default function FaqPage() {
             anything else — our team will be happy to assist.
           </p>
           <a
-            href="mailto:cheeweijian2003@gmail.com?subject=Nurture%20Nest%20enquiry"
+            href="mailto:cheeweijian2003@gmail.com?subject=Jade%20&%20Bloom%20enquiry"
             className={`mt-8 inline-flex h-12 items-center justify-center rounded-full bg-[#fbf7ef] px-7 text-sm font-semibold text-[#2f4431] transition hover:-translate-y-0.5 hover:bg-white ${focusRing}`}
           >
-            Contact Nurture Nest
+            Contact Jade & Bloom
           </a>
         </div>
       </section>

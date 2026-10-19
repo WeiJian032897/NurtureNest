@@ -1,5 +1,5 @@
 export const navItems = [
-  { label: "Home", href: "/" },
+  { label: "Jade & Bloom", href: "/" },
   { label: "Rooms", href: "/rooms" },
   { label: "Packages", href: "/packages" },
   { label: "Care", href: "/care" },
@@ -79,37 +79,37 @@ export const accommodationComparison = [
   {
     dimension: "Sleep",
     standard: "Prioritizing traveler comfort",
-    nurture: "Balancing the mother's need for rest with the baby's care requirements",
+    jadeAndBloom: "Balancing the mother's need for rest with the baby's care requirements",
   },
   {
     dimension: "Seating",
     standard: "Standard lounge chair",
-    nurture: "Chair suitable for feeding, holding the baby, and keeping the baby company",
+    jadeAndBloom: "Chair suitable for feeding, holding the baby, and keeping the baby company",
   },
   {
     dimension: "Storage",
     standard: "Luggage & Clothing",
-    nurture: "Added storage for baby clothes, diapers, and care supplies",
+    jadeAndBloom: "Added storage for baby clothes, diapers, and care supplies",
   },
   {
     dimension: "Bathroom",
     standard: "Prioritizes aesthetics and convenience",
-    nurture: "Focuses on ease of use, lighting, and safety features such as slip resistance",
+    jadeAndBloom: "Focuses on ease of use, lighting, and safety features such as slip resistance",
   },
   {
     dimension: "Family Companionship",
     standard: "For short-term travelers",
-    nurture: "Space for a partner or an approved family member to accompany the traveler",
+    jadeAndBloom: "Space for a partner or an approved family member to accompany the traveler",
   },
   {
     dimension: "Privacy",
     standard: "Accommodation privacy",
-    nurture: "Balancing visitor management with the privacy of mother and baby",
+    jadeAndBloom: "Balancing visitor management with the privacy of mother and baby",
   },
   {
     dimension: "Service Contact",
     standard: "General Room Service",
-    nurture: "Specific staff contact details can be configured",
+    jadeAndBloom: "Specific staff contact details can be configured",
   },
 ];
 

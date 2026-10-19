@@ -19,9 +19,9 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Nurture Nest | Premium Confinement Centre",
+  title: "Nurture Nest | Confinement Care Finder",
   description:
-    "A refined postpartum care brand experience for mothers and newborns.",
+    "Discover, compare and book trusted confinement centres for postpartum care of mothers and newborns.",
   icons: {
     icon: "/images/LogoNurtureNest_v2.jpg",
   },

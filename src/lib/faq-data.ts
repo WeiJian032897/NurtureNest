@@ -7,12 +7,12 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    questionEn: "What is Nurture Nest?",
-    questionCn: "Nurture Nest 是什么？",
+    questionEn: "What is Jade & Bloom?",
+    questionCn: "Jade & Bloom 是什么？",
     answerEn:
-      "Nurture Nest is a premium postnatal care and wellness centre in Kuala Lumpur, thoughtfully designed to support mothers through recovery while providing attentive newborn care. With refined accommodation, personalised services and a tranquil lakeside setting, we create a nurturing environment for the entire family.",
+      "Jade & Bloom is a premium postnatal care and wellness centre in Kuala Lumpur, thoughtfully designed to support mothers through recovery while providing attentive newborn care. With refined accommodation, personalised services and a tranquil lakeside setting, we create a nurturing environment for the entire family.",
     answerCn:
-      "Nurture Nest 是一家位于吉隆坡的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验。",
+      "Jade & Bloom 是一家位于吉隆坡的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验，",
   },
   {
     questionEn:
@@ -34,8 +34,8 @@ export const faqs: FaqItem[] = [
   },
   {
     questionEn:
-      "What makes Nurture Nest's dining experience special?",
-    questionCn: "Nurture Nest 的餐饮体验有什么特色？",
+      "What makes Jade & Bloom's dining experience special?",
+    questionCn: "Jade & Bloom 的餐饮体验有什么特色？",
     answerEn:
       "Our dedicated culinary team, featuring experienced chefs with five-star hospitality backgrounds, prepares carefully curated confinement meals with an emphasis on flavour, variety and nutritional balance. Selected traditional nourishing preparations are available according to individual needs and dietary suitability.",
     answerCn:
@@ -43,12 +43,12 @@ export const faqs: FaqItem[] = [
   },
   {
     questionEn:
-      "How does Nurture Nest protect the privacy and security of mothers and babies?",
+      "How does Jade & Bloom protect the privacy and security of mothers and babies?",
     questionCn: "中心如何保障妈妈与宝宝的隐私及安全？",
     answerEn:
-      "Security is a core part of the Nurture Nest experience. Professional security personnel, controlled access points and visitor verification help protect residents and their families. Restricted areas, including residential floors and newborn care zones, are accessible only to authorised individuals. Each family may include the mother, baby and up to two additional approved family members under our standard occupancy policy.",
+      "Security is a core part of the Jade & Bloom experience. Professional security personnel, controlled access points and visitor verification help protect residents and their families. Restricted areas, including residential floors and newborn care zones, are accessible only to authorised individuals. Each family may include the mother, baby and up to two additional approved family members under our standard occupancy policy.",
     answerCn:
-      "安全保障是 Nurture Nest 服务体验的重要一环。我们通过专业保安人员、出入口管制及访客身份核实，保护住客及其家人的安全。住宅楼层与新生儿护理区域等限制区域仅限获授权人士进入。根据标准入住政策，每组家庭可包括妈妈、宝宝及最多两位额外获批准的家人。",
+      "安全保障是 Jade & Bloom 服务体验的重要一环。我们通过专业保安人员、出入口管制及访客身份核实，保护住客及其家人的安全。住宅楼层与新生儿护理区域等限制区域仅限获授权人士进入。根据标准入住政策，每组家庭可包括妈妈、宝宝及最多两位额外获批准的家人。",
   },
   {
     questionEn:
@@ -61,7 +61,7 @@ export const faqs: FaqItem[] = [
   },
   {
     questionEn:
-      "Does Nurture Nest organise activities for families and mothers?",
+      "Does Jade & Bloom organise activities for families and mothers?",
     questionCn: "中心会为家庭及妈妈举办活动吗？",
     answerEn:
       "Yes. Our resident club hosts thoughtfully planned family gatherings, bonding activities and selected social sessions for mothers. These experiences encourage meaningful family connections and provide opportunities for mothers to meet, share experiences and build lasting friendships at their own pace.",

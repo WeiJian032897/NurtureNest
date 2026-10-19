@@ -25,15 +25,12 @@ export function SiteNavigation() {
             alt=""
             className="h-12 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center leading-none">
             <span
-              className="uppercase text-[25px] font-semibold tracking-[0.10em] text-[#2D4130]"
+              className="uppercase text-[23px] font-semibold tracking-[0.10em] text-[#2D4130]"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               NURTURE NEST
-            </span>
-            <span className="mt-[6px] text-[0.65rem] font-medium uppercase tracking-[0.18em] text-[#9a9183]">
-              Postnatal Care & Wellness Centre
             </span>
           </div>
         </Link>
@@ -85,13 +82,13 @@ export function SiteFooter() {
               />
               <div className="flex min-w-max flex-col justify-center">
                 <p className="font-serif text-xl tracking-[0.2em] text-[#fbf7ef]">NURTURE NEST</p>
-                <p className="mt-1 whitespace-nowrap text-[0.6rem] font-medium tracking-[0.16em] text-[#fbf7ef]/60">
-                  POSTNATAL CARE &amp; WELLNESS CENTRE
+                <p className="mt-1 whitespace-nowrap text-[12px] font-medium tracking-[0.08em] text-[#f4ead8]">
+                  Confinement Care Finder
                 </p>
               </div>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-6 text-[#fbf7ef]/80">
-              Thoughtful postnatal care and wellness for your family’s first days together.
+              Nurture Nest is a confinement care discovery and booking platform, connecting families with premium postnatal care and wellness centres across Malaysia. 
             </p>
           </div>
 
@@ -110,7 +107,7 @@ export function SiteFooter() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-[#c5aa70]">Contact</h2>
             <address className="mt-5 space-y-6 text-sm not-italic leading-6 text-white/70">
               <p className="[text-wrap:pretty]">
-                Nurture Nest Postnatal Care &amp; Wellness Centre<br />
+                Confinement Care Finder <br />
                 No. 18, Jalan Seri Damai 2,<br />
                 Taman Damai Indah, Bukit Jalil,<br />
                 57000 Kuala Lumpur, Malaysia
@@ -119,7 +116,7 @@ export function SiteFooter() {
                 <a className="transition-colors hover:text-white" href="tel:+60177029187">+60 17-702 9187</a>
                 <a className="inline-flex items-center gap-2 rounded-full border border-[#c5aa70] bg-[#c5aa70] px-4 py-2 font-semibold text-[#2f4431] transition-colors hover:border-[#d6bf8b] hover:bg-[#d6bf8b]" href="https://wa.me/60177029187" target="_blank" rel="noreferrer"><FaWhatsapp aria-hidden="true" />WhatsApp</a>
               </div>
-              <p>Mon–Sat 9am–6pm</p>
+              <p>Mon–Sat , 9am–6pm</p>
             </address>
           </div>
 
