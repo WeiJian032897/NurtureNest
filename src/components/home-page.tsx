@@ -384,7 +384,7 @@ function FeaturedRoomSection() {
     price: "RM 49,999",
     priceNote: "tax included",
     duration: "42 days in total",
-    image: "/images/unused2.jpg",
+    image: "/images/jb-featured-room.jpg",
   };
 
   return (
