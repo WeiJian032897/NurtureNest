@@ -4,65 +4,114 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
-import { navItems } from "@/lib/home-data";
+import { getCentreNavItems } from "@/lib/home-data";
+import { centres } from "@/lib/centres";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
 
 export function SiteNavigation() {
   const pathname = usePathname();
+  const activeCentre = centres.find((centre) => pathname.startsWith(centre.href));
+  const isCentrePage = Boolean(activeCentre);
+  const navigationItems = isCentrePage
+    ? getCentreNavItems(activeCentre!.href)
+    : [{ label: "Home", href: "/" }];
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#e8ddca]/80 bg-[#fbf7ef]/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-8 lg:px-10">
-        <Link
-          href="/"
-          className={`group flex items-center gap-[14px] ${focusRing}`}
-          aria-label="Nurture Nest home"
-        >
-          <img
-            src="/images/LogoNurtureNest_v2.jpg"
-            alt=""
-            className="h-12 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105"
-          />
-          <div className="flex items-center leading-none">
-            <span
-              className="uppercase text-[23px] font-semibold tracking-[0.10em] text-[#2D4130]"
-              style={{ fontFamily: "var(--font-cormorant)" }}
+      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-4 lg:px-10">
+        <div className="flex items-center gap-3 md:justify-self-start">
+          {isCentrePage && (
+            <Link
+              href="/"
+              aria-label="Go to Nurture Nest home page"
+              aria-describedby="home-arrow-tooltip"
+              className={`group relative -translate-x-44 flex size-11 shrink-0 items-center justify-center rounded-full border border-[#c9d4c1] bg-[#fbf7ef] text-[#7f967a] transition duration-200 hover:-translate-x-38 hover:border-[#2f4431] hover:bg-[#2f4431] hover:text-[#fbf7ef] ${focusRing}`}
             >
-              NURTURE NEST
-            </span>
-          </div>
-        </Link>
-
-        <div className="order-3 flex w-full gap-2 overflow-x-auto pt-2 text-sm font-medium text-[#6e6658] md:order-2 md:w-auto md:items-center md:gap-2 md:overflow-visible md:pt-0">
-          {navItems.map((item) => {
-            const isActive =
-              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={`shrink-0 rounded-full px-4 py-2 transition duration-200 ${focusRing} ${
-                  isActive
-                    ? "bg-[#2f4431] text-white shadow-sm"
-                    : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"
-                }`}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="size-5"
               >
-                {item.label}
-              </Link>
-            );
-          })}
+                <path
+                  d="M19 12H5m0 0 6 6m-6-6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span
+                id="home-arrow-tooltip"
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 top-full z-[60] mt-2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-full bg-[#2f4431] px-3 py-1.5 font-sans text-xs font-medium tracking-wide text-[#fbf7ef] opacity-0 shadow-lg transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+              >
+                Nurture Nest Home Page ?
+              </span>
+            </Link>
+          )}
+          <div className="-ml-20 flex items-center gap-4">
+            <Link
+              href="/"
+              className={`group flex shrink-0 items-center ${focusRing}`}
+              aria-label="Nurture Nest home"
+            >
+              <img
+                src="/images/LogoNurtureNest_v2.jpg"
+                alt="Nurture Nest home page"
+                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
+            <div className="flex flex-col items-start leading-none">
+              <span
+                className="whitespace-nowrap uppercase text-[26px] font-semibold tracking-[0.10em] text-[#2D4130]"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                NURTURE NEST
+              </span>
+              {isCentrePage && (
+                <span className="mt-2 inline-flex items-center gap-4 font-sans text-[18px] font-medium italic tracking-[0.04em] text-[#6f866b]">
+                  <span aria-hidden="true" className="size-1.5 rounded-full bg-[#c5aa70]" />
+                  Jade &amp; Bloom
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
-        <a
-          href="/faq#enquiry"
-          className={`order-2 rounded-full border border-[#2f4431] bg-[#2f4431] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#253827] md:order-3 ${focusRing}`}
-        >
-          Enquire
-        </a>
+        <div className="order-3 flex w-full flex-wrap items-center gap-2 pt-2 text-[15px] font-medium text-[#6e6658] md:order-none md:w-auto md:justify-self-center md:pt-0">
+          {navigationItems.map((item) => {
+            const isActive = item.href === "/" ? pathname === "/" : pathname === item.href;
+
+            return <Link key={item.href} href={item.href} aria-current={isActive ? "page" : undefined} className={`rounded-full px-5 py-2.5 transition duration-200 ${focusRing} ${isActive ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>{item.label}</Link>;
+          })}
+          {!isCentrePage && (
+            <details className="group relative">
+              <summary className={`flex cursor-pointer list-none items-center gap-2 rounded-full px-5 py-2.5 transition duration-200 [&::-webkit-details-marker]:hidden ${focusRing} ${pathname.startsWith("/centres") ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>
+                Centres <span aria-hidden="true" className="text-[10px] transition-transform group-open:rotate-180">▼</span>
+              </summary>
+              <div className="absolute left-0 top-full z-50 mt-2 min-w-56 rounded-2xl border border-[#e8ddca] bg-[#fbf7ef] p-2 shadow-xl">
+                {centres.map((centre) => (
+                  <Link key={centre.href} href={centre.href} className={`block rounded-xl px-4 py-3 transition hover:bg-white ${focusRing}`}>
+                    <span className="block font-semibold text-[#2f4431]">{centre.name}</span>
+                    <span className="mt-1 block text-xs text-[#8a8172]">{centre.location}</span>
+                  </Link>
+                ))}
+              </div>
+            </details>
+          )}
+        </div>
+
+        {isCentrePage && (
+          <a
+            href={`${getCentreNavItems(activeCentre!.href)[4].href}#enquiry`}
+            className={`order-2 justify-self-end rounded-full border border-[#2f4431] bg-[#2f4431] px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#253827] md:order-none ${focusRing}`}
+          >
+            Enquire
+          </a>
+        )}
       </nav>
     </header>
   );
@@ -95,7 +144,11 @@ export function SiteFooter() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-[#c5aa70]">Explore</h2>
             <nav aria-label="Footer navigation" className="mt-5 flex flex-col items-start gap-3 text-sm text-white/70">
-              {navItems.map((item) => (
+              {[
+                { label: "Home", href: "/" },
+                { label: "Centres", href: "/centres" },
+                ...getCentreNavItems(centres[0].href),
+              ].map((item) => (
                 <Link key={item.href} href={item.href} className={`transition-colors hover:text-[#c5aa70] ${focusRing}`}>
                   {item.label}
                 </Link>
@@ -107,7 +160,7 @@ export function SiteFooter() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-[#c5aa70]">Contact</h2>
             <address className="mt-5 space-y-6 text-sm not-italic leading-6 text-white/70">
               <p className="[text-wrap:pretty]">
-                Confinement Care Finder <br />
+                Confinement Care Finder & Booking Platform<br />
                 No. 18, Jalan Seri Damai 2,<br />
                 Taman Damai Indah, Bukit Jalil,<br />
                 57000 Kuala Lumpur, Malaysia

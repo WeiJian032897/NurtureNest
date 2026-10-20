@@ -21,18 +21,32 @@ const philosophyIcons = [Moon, Baby, HeartPulse];
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
 
-export function HomePage() {
+export function HomePage({
+  section = "all",
+}: {
+  section?: "all" | "rooms" | "packages" | "care";
+}) {
   return (
     <main className="min-h-screen overflow-hidden bg-[#fbf7ef] text-[#2d2a22]">
       <SiteNavigation />
-      <HeroSection />
-      <BrandPhilosophySection />
-      <AccommodationExperienceSection />
-      <CoreServicesSection />
-      <EnvironmentFacilitiesSection />
-      <BrandDifferentiationSection />
-      <FeaturedRoomSection />
-      <TestimonialsSection />
+      {section === "all" ? (
+        <>
+          <HeroSection />
+          <BrandPhilosophySection />
+          <AccommodationExperienceSection />
+          <CoreServicesSection />
+          <EnvironmentFacilitiesSection />
+          <BrandDifferentiationSection />
+          <FeaturedRoomSection />
+          <TestimonialsSection />
+        </>
+      ) : (
+        <section className="min-h-screen pt-28">
+          {section === "rooms" && <AccommodationExperienceSection />}
+          {section === "packages" && <FeaturedRoomSection />}
+          {section === "care" && <CoreServicesSection />}
+        </section>
+      )}
       <SiteFooter />
     </main>
   );
@@ -44,7 +58,7 @@ function HeroSection() {
       <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 py-12 lg:grid-cols-[1fr_0.95fr] lg:py-16">
         <div className="animate-rise max-w-2xl">
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-[#7f967a]">
-            Premium postnatal care & wellness centre
+            Setapak&apos;s Trusted Confinement Centre · Since 1988
           </p>
           <h1 className="font-serif text-5xl leading-[1.02] text-[#28251f] sm:text-6xl lg:text-7xl">
             Every Mother Deserves a Beautiful Beginning.
@@ -55,10 +69,10 @@ function HeroSection() {
             embrace this new chapter with greater comfort, confidence and peace of mind.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/care" variant="primary">
+            <ButtonLink href="/centres/jade-and-bloom/care" variant="primary">
               Explore Our Care
             </ButtonLink>
-            <ButtonLink href="/rooms" variant="secondary">
+            <ButtonLink href="/centres/jade-and-bloom/rooms" variant="secondary">
               Enquire About Your Stay
             </ButtonLink>
           </div>
@@ -86,7 +100,11 @@ function BrandPhilosophySection() {
       <SectionIntro
         eyebrow="Brand Philosophy"
         title="A Gentle Beginning, Thoughtfully Bloomed"
-        text="Welcoming a new life is a beautiful beginning, but the weeks that follow deserve just as much care. At Jade & Bloom, we believe mothers need space to rest, babies deserve attentive care, and families deserve the time and support to grow together. Through thoughtful postnatal support, a peaceful living environment and meaningful moments of connection, we aim to make the first 42 days a more comfortable and reassuring experience for every family."
+        text="Welcoming a new life is a beautiful beginning, but the weeks that follow deserve just as much care. 
+        At Jade & Bloom, we believe mothers need space to rest, babies deserve attentive care, and families deserve the time and support to grow together. 
+        Rooted in Setapak since 1988, we have walked alongside generations of local families, caring for new mothers and their babies with warmth and tradition. Over more than 35 years, our centre has earned the respect of fellow practitioners and the trust of thousands of families. 
+        Through thoughtful postnatal support, a peaceful living environment and meaningful moments of connection, we aim to make the first 42 days a more comfortable and reassuring experience for every family.
+"
       />
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {brandPhilosophy.map((value, index) => {
@@ -216,7 +234,7 @@ function AccommodationExperienceSection() {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <ButtonLink href="/rooms" variant="primary">
+        <ButtonLink href="/centres/jade-and-bloom/rooms" variant="primary">
           Explore Our Rooms
         </ButtonLink>
       </div>
@@ -323,7 +341,7 @@ function BrandDifferentiationSection() {
         </p>
       </div>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-[4.5rem] grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {brandDifferentiation.map((item, index) => (
           <article
             key={item.title}
@@ -338,6 +356,14 @@ function BrandDifferentiationSection() {
             <p className="mt-3 leading-7 text-[#6e6658]">{item.text}</p>
           </article>
         ))}
+      </div>
+
+      <div className="mt-24 flex flex-col items-center text-center">
+        <span className="mb-5 h-px w-14 bg-[#c9d4c1]" aria-hidden="true" />
+        <p className="max-w-4xl font-serif text-xl italic leading-relaxed text-[#7f967a] sm:text-2xl">
+          <span className="block">Trusted by Setapak families since 1988,</span>
+          <span className="block">and respected within the confinement care community.</span>
+        </p>
       </div>
     </Section>
   );
@@ -410,7 +436,7 @@ function FeaturedRoomSection() {
             </div>
 
             <div className="mt-8">
-              <ButtonLink href="/packages" variant="primary">
+              <ButtonLink href="/centres/jade-and-bloom/packages" variant="primary">
                 Explore Our Packages
               </ButtonLink>
             </div>

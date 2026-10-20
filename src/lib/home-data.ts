@@ -1,10 +1,12 @@
-export const navItems = [
-  { label: "Jade & Bloom", href: "/" },
-  { label: "Rooms", href: "/rooms" },
-  { label: "Packages", href: "/packages" },
-  { label: "Care", href: "/care" },
-  { label: "FAQ", href: "/faq" },
-];
+export function getCentreNavItems(basePath: string) {
+  return [
+    { label: "Main", href: basePath },
+    { label: "Rooms", href: `${basePath}/rooms` },
+    { label: "Packages", href: `${basePath}/packages` },
+    { label: "Care", href: `${basePath}/care` },
+    { label: "FAQ", href: `${basePath}/faq` },
+  ];
+}
 
 export const brandPhilosophy = [
   {
