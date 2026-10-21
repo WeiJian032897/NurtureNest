@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "Discover trusted confinement centres offering postnatal care for mothers, babies and families.",
   icons: {
-    icon: "/images/LogoNurtureNest_v2.jpg",
+    icon: "/images/logoNurtureNest_v2.jpg",
   },
 };
 

@@ -59,7 +59,7 @@ export function SiteNavigation() {
               aria-label={isCentrePage ? "Jade & Bloom home" : "Nurture Nest home"}
             >
               <img
-                src={isCentrePage ? "/images/jadeBloomHome/jadeBloomLogo.jpg" : "/images/LogoNurtureNest_v2.jpg"}
+                src={isCentrePage ? "/images/centresLogo/jadeBloomLogo.jpg" : "/images/logoNurtureNest_v2.jpg"}
                 alt={isCentrePage ? "Jade & Bloom logo" : "Nurture Nest logo"}
                 className={`${isCentrePage ? "h-16 w-24 object-contain" : "h-14 w-auto"} transition-transform duration-300 group-hover:scale-105`}
               />
@@ -136,7 +136,7 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src="/images/LogoNurtureNest_v2.jpg"
+                src="/images/logoNurtureNest_v2.jpg"
                 alt="Nurture Nest logo"
                 className="size-14 shrink-0 rounded-sm object-contain"
               />
