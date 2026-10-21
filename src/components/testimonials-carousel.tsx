@@ -6,11 +6,11 @@ import Image from "next/image";
 import { testimonials } from "@/lib/home-data";
 
 const testimonialImages = [
-  "/images/mother.jpg",
-  "/images/father.jpg",
-  "/images/parents.jpg",
-  "/images/mother2.jpg",
-  "/images/parents2.jpg",
+  "/images/jadeBloomHome/mother.jpg",
+  "/images/jadeBloomHome/father.jpg",
+  "/images/jadeBloomHome/parents.jpg",
+  "/images/jadeBloomHome/mother2.jpg",
+  "/images/jadeBloomHome/parents2.jpg",
 ];
 
 export function TestimonialsCarousel() {

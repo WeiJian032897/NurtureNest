@@ -84,7 +84,7 @@ function HeroSection() {
           </div>
           <SurfaceImage
             label="Mother gently holding her newborn baby"
-            image="/images/motherHugBaby.jpg"
+            image="/images/jadeBloomHome/motherHugBaby.jpg"
             className="h-[34rem] rounded-t-full rounded-b-[1.5rem]"
             frameClassName="rounded-t-full rounded-b-[2rem] p-3"
           />
@@ -384,7 +384,7 @@ function FeaturedRoomSection() {
     price: "RM 49,999",
     priceNote: "tax included",
     duration: "42 days in total",
-    image: "/images/jb-featured-room.jpg",
+    image: "/images/jadeBloomHome/jb-featured-room.jpg",
   };
 
   return (

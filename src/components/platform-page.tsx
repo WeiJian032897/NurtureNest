@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
-import { centres } from "@/lib/centres";
 import { TiltedGridHero, type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
 
 const heroImages: TiltedGridImage[] = [
@@ -47,28 +45,6 @@ export function PlatformPage({ directory = false }: { directory?: boolean }) {
             </div>
           </TiltedGridHero>
 
-          <div id="centres" className="scroll-mt-28 pt-16 sm:pt-20">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-[#7f967a]">Explore care centres</p>
-            <h2 className="font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">Thoughtful care starts with the right centre.</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#6e6658]">
-              Browse welcoming spaces and postnatal support for mothers, babies and families.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {centres.map((centre) => (
-              <article key={centre.href} className="overflow-hidden rounded-2xl border border-[#e8ddca] bg-white/80 shadow-lg shadow-[#d9ccb6]/20">
-                <div className="h-2 bg-[#c5aa70]" />
-                <div className="p-7">
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7f967a]">{centre.location}</p>
-                  <h2 className="mt-3 font-serif text-3xl text-[#2f4431]">{centre.name}</h2>
-                  <p className="mt-4 leading-7 text-[#6e6658]">{centre.description}</p>
-                  <Link href={centre.href} className="mt-7 inline-flex h-11 items-center rounded-full bg-[#2f4431] px-6 text-sm font-semibold text-white transition hover:bg-[#253827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]">
-                    Explore centre
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
       <SiteFooter />

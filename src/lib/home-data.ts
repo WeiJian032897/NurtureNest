@@ -26,7 +26,7 @@ export const brandPhilosophy = [
 export const rooms = [
   {
     name: "Deluxe Room",
-    image: "/images/serene-suite.jpg",
+    image: "/images/jadeBloomHome/serene-suite.jpg",
     eyebrow: "Comfortable & Practical",
     tag: "Entry-Level Room",
     description:
@@ -43,7 +43,7 @@ export const rooms = [
   },
   {
     name: "Premier Room",
-    image: "/images/PremierRoom.jpg",
+    image: "/images/jadeBloomHome/PremierRoom.jpg",
     eyebrow: "More Space and Comfort",
     tag: "Elevated Experience",
     description:
@@ -60,7 +60,7 @@ export const rooms = [
   },
   {
     name: "Signature Suite",
-    image: "/images/signatureSuite.jpg",
+    image: "/images/jadeBloomHome/signatureSuite.jpg",
     eyebrow: "Spacious & Private",
     tag: "Premium Accommodation",
     description:
@@ -120,48 +120,48 @@ export const services = [
     number: "01",
     category: "MATERNAL CARE",
     title: "Maternal Postnatal Support",
-    image: "/images/maternalCare.jpg",
+    image: "/images/jadeBloomHome/maternalCare.jpg",
     text: "Thoughtful support for the early days of motherhood, with an emphasis on rest, everyday comfort and a more supported transition into family life.",
   },
   {
     number: "02",
     category: "NEWBORN CARE",
     title: "Newborn Care",
-    image: "/images/newBorn.jpg",
+    image: "/images/jadeBloomHome/newBorn.jpg",
     text: "Gentle, attentive care for your little one, designed to help families feel more supported as they settle into life with a newborn.",
   },
   {
     number: "03",
     category: "NOURISHING CUISINE",
     title: "Nourishing Cuisine",
-    image: "/images/nourishCuisine.jpg",
+    image: "/images/jadeBloomHome/nourishCuisine.jpg",
     text: "Thoughtfully prepared meals bring warmth and a sense of routine to each day, making everyday dining another part of a considered stay.",
   },
   {
     number: "04",
     category: "PERSONALISED WELLNESS",
     title: "Personalised Wellness",
-    image: "/images/personalWellness.jpg",
+    image: "/images/jadeBloomHome/personalWellness.jpg",
     text: "A more personal approach to everyday wellbeing, with thoughtful touches that help each family find a comfortable rhythm during their stay.",
   },
 ];
 
 export const environmentFacilities = {
-  heroImage: "/images/EnvironmentandFacilities.jpg",
+  heroImage: "/images/jadeBloomHome/EnvironmentandFacilities.jpg",
   spaces: [
     {
       title: "Lakeside & Gardens",
-      image: "/images/lakeside.jpg",
+      image: "/images/jadeBloomHome/lakeside.jpg",
       text: "Lakeside, gardens and outdoor areas for quiet moments of rest and fresh air.",
     },
     {
       title: "Quiet Retreats",
-      image: "/images/retreats.jpg",
+      image: "/images/jadeBloomHome/retreats.jpg",
       text: "Indoor lounges, reading corners and common spaces designed for calm and reflection.",
     },
     {
       title: "Space for Family",
-      image: "/images/familySpace.jpg",
+      image: "/images/jadeBloomHome/familySpace.jpg",
       text: "Welcoming areas where families can spend time together, talk and rest as one.",
     },
   ],

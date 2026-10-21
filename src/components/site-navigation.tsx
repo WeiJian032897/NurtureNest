@@ -52,32 +52,33 @@ export function SiteNavigation() {
               </span>
             </Link>
           )}
-          <div className="-ml-20 flex items-center gap-4">
+          <div className={`flex items-center ${isCentrePage ? "-ml-20 gap-3" : "-ml-20 gap-4"}`}>
             <Link
-              href="/"
+              href={navigationItems[0].href}
               className={`group flex shrink-0 items-center ${focusRing}`}
-              aria-label="Nurture Nest home"
+              aria-label={isCentrePage ? "Jade & Bloom home" : "Nurture Nest home"}
             >
               <img
-                src="/images/LogoNurtureNest_v2.jpg"
-                alt="Nurture Nest home page"
-                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+                src={isCentrePage ? "/images/jadeBloomHome/jadeBloomLogo.jpg" : "/images/LogoNurtureNest_v2.jpg"}
+                alt={isCentrePage ? "Jade & Bloom logo" : "Nurture Nest logo"}
+                className={`${isCentrePage ? "h-16 w-24 object-contain" : "h-14 w-auto"} transition-transform duration-300 group-hover:scale-105`}
               />
             </Link>
-            <div className="flex flex-col items-start leading-none">
+            {isCentrePage ? (
+              <span
+                className="whitespace-nowrap font-serif text-[27px] font-medium tracking-[0.035em] text-[#2f4431] sm:text-[30px]"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Jade <span className="italic text-[#8d7950]">&amp;</span> Bloom
+              </span>
+            ) : (
               <span
                 className="whitespace-nowrap uppercase text-[26px] font-semibold tracking-[0.10em] text-[#2D4130]"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 NURTURE NEST
               </span>
-              {isCentrePage && (
-                <span className="mt-2 inline-flex items-center gap-4 font-sans text-[18px] font-medium italic tracking-[0.04em] text-[#6f866b]">
-                  <span aria-hidden="true" className="size-1.5 rounded-full bg-[#c5aa70]" />
-                  Jade &amp; Bloom
-                </span>
-              )}
-            </div>
+            )}
           </div>
         </div>
 
@@ -118,6 +119,16 @@ export function SiteNavigation() {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  const activeCentre = centres.find((centre) => pathname.startsWith(centre.href));
+  const exploreItems = pathname === "/"
+    ? [{ label: "Home", href: "/" }]
+    : [
+        { label: "Home", href: "/" },
+        ...(!activeCentre ? [{ label: "Centres", href: "/centres" }] : []),
+        ...getCentreNavItems(activeCentre?.href ?? centres[0].href),
+      ];
+
   return (
     <footer className="bg-[#2f4431] px-5 pt-14 pb-0 text-[#fbf7ef] sm:px-8 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -145,9 +156,7 @@ export function SiteFooter() {
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-[#c5aa70]">Explore</h2>
             <nav aria-label="Footer navigation" className="mt-5 flex flex-col items-start gap-3 text-sm text-white/70">
               {[
-                { label: "Home", href: "/" },
-                { label: "Centres", href: "/centres" },
-                ...getCentreNavItems(centres[0].href),
+                ...exploreItems,
               ].map((item) => (
                 <Link key={item.href} href={item.href} className={`transition-colors hover:text-[#c5aa70] ${focusRing}`}>
                   {item.label}
