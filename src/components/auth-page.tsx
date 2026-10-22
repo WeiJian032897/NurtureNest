@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Eye, EyeOff, ArrowRight, Leaf, LoaderCircle, MailCheck } from "lucide-react";
+import { Eye, EyeOff, ArrowRight, LoaderCircle, MailCheck } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -156,17 +156,17 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
   const fields: (keyof Values)[] = signup && !verification ? ["name", "email", "password", "confirmPassword"] : ["email", "password"];
   return <main className="auth-shell min-h-dvh" lang={language === "zh" ? "zh-CN" : "en"}>
     <div className="mx-auto grid min-h-dvh max-w-[1600px] lg:grid-cols-[1.05fr_1fr]">
-      <aside className="auth-story relative m-4 flex flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:m-6 sm:p-12 lg:min-h-[calc(100dvh-3rem)]">
-        <div className="relative z-10 flex items-center gap-3"><Leaf aria-hidden="true" className="size-7" /><span className="auth-serif text-xl tracking-[0.18em]">NURTURE NEST</span></div>
-        <div className="relative z-10 py-10 lg:py-16">
-          <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] opacity-80">{t.eyebrow}</p>
-          <h1 className="auth-serif whitespace-pre-line text-4xl leading-[1.13] sm:text-5xl xl:text-6xl">{t.brandTitle}</h1>
-          <p className="mt-6 max-w-sm text-sm leading-7 opacity-85">{t.brandBody}</p>
-          <div className="relative mt-10 hidden h-64 max-w-sm overflow-hidden rounded-t-[10rem] rounded-b-2xl border border-white/25 lg:block xl:h-80">
+      <aside className={`auth-story relative m-4 flex flex-col ${signup ? "gap-8 px-7 pt-10 pb-7 sm:px-12 sm:pt-16 sm:pb-12" : "justify-between p-7 sm:p-12"} overflow-hidden rounded-[2rem] sm:m-6 lg:min-h-[calc(100dvh-3rem)]`}>
+        <div className="relative z-10 flex items-center gap-3"><Image src="/images/logoNurtureNest_v2.jpg" alt="" width={40} height={40} className="size-10 shrink-0 rounded-full bg-[#fbf7ef] object-contain" /><span className="auth-serif text-xl tracking-[0.18em]">NURTURE NEST</span></div>
+        <div className={`relative z-10 ${signup ? "@container flex w-full flex-1 flex-col justify-center gap-6 sm:gap-8" : "py-10 lg:py-16"}`}>
+          <p className={`${signup ? "" : "mb-5"} text-xs font-medium uppercase tracking-[0.2em] opacity-80`}>{t.eyebrow}</p>
+          <h1 className={`auth-serif leading-[1.13] ${signup ? "whitespace-nowrap text-[clamp(1rem,10cqw,3.75rem)]" : "whitespace-pre-line text-4xl sm:text-5xl xl:text-6xl"}`}>{t.brandTitle}</h1>
+          <p className={`${signup ? "" : "mt-6"} max-w-sm text-sm leading-7 opacity-85`}>{t.brandBody}</p>
+          <div className={`relative ${signup ? "aspect-[6/5] w-full max-w-sm shrink-0 lg:aspect-auto lg:h-64" : "mt-10 hidden h-64 max-w-sm lg:block"} overflow-hidden rounded-t-[10rem] rounded-b-2xl border border-white/25 xl:h-80`}>
             <Image src="/images/nurtureNestHome/happyMother.jpg" alt="" fill sizes="384px" className="object-cover" priority />
           </div>
         </div>
-        <p className="relative z-10 hidden text-xs tracking-wide opacity-75 lg:block">{t.caption}</p>
+        <p className={`relative z-10 text-xs tracking-wide opacity-75 ${signup ? "shrink-0" : "hidden lg:block"}`}>{t.caption}</p>
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -bottom-40 size-[32rem] rounded-full border border-white/10" />
         <div aria-hidden="true" className="pointer-events-none absolute -right-16 -bottom-24 size-[32rem] rounded-full border border-white/10" />
       </aside>
@@ -183,7 +183,7 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-8 lg:py-12">
           {signupUser && signup && pendingSignup ? <SignupVerification user={signupUser} language={language} remaining={remaining} startCooldown={startCooldown} onLeave={leaveSignup} /> : (
           <div className="animate-rise">
-            <span className="auth-emblem mb-6 inline-flex size-12 items-center justify-center rounded-full">{verification ? <MailCheck aria-hidden="true" /> : <Leaf aria-hidden="true" />}</span>
+            <span className="auth-emblem mb-6 inline-flex size-12 items-center justify-center rounded-full">{verification ? <MailCheck aria-hidden="true" /> : <Image src="/images/logoNurtureNest_v2.jpg" alt="Nurture Nest" width={48} height={48} className="size-12 rounded-full bg-[#fbf7ef] object-contain" />}</span>
             <h2 className="auth-serif text-4xl leading-tight sm:text-5xl">{verification && signup ? t.sentTitle : signup ? t.signupTitle : t.loginTitle}</h2>
             <p className="auth-muted mt-4 text-sm leading-7">{verification ? t.resendHint : signup ? t.signupBody : t.loginBody}</p>
             <div aria-live="polite" aria-atomic="true">{notice && <p className="auth-notice mt-5 rounded-xl border p-4 text-sm leading-6">{t[notice]}</p>}</div>
