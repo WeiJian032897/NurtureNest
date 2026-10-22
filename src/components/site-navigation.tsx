@@ -52,7 +52,7 @@ export function SiteNavigation() {
               </span>
             </Link>
           )}
-          <div className={`flex items-center ${isCentrePage ? "-ml-20 gap-3" : "-ml-20 gap-4"}`}>
+          <div className={`flex items-center -ml-20 ${isCentrePage ? "gap-3" : "gap-4"}`}>
             <Link
               href={navigationItems[0].href}
               className={`group flex shrink-0 items-center ${focusRing}`}

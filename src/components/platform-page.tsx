@@ -9,6 +9,7 @@ import {
   Scale,
 } from "lucide-react";
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
+import PolaroidLineCarousel, { type Slide } from "@/components/ui/polaroid-line-carousel";
 import { TiltedGridHero, type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
 
 const heroImages: TiltedGridImage[] = [
@@ -119,6 +120,45 @@ const packageInclusions = [
     text: "A clean, quiet room with the essentials you and your baby need during your stay.",
     image: "comfortRoom.jpg",
     alt: "A comfortable room for mother and baby",
+  },
+];
+
+const partnerCentres: Slide[] = [
+  {
+    image: "/images/centresLogo(Full)/fullJadeBloom.png",
+    title: "Jade & Bloom",
+    caption: "Trusted postnatal care in Setapak, Malaysia, nurturing mothers and newborns since 1988.",
+    alt: "Jade & Bloom confinement centre logo",
+  },
+  {
+    image: "/images/centresLogo(Full)/fullAmaraHaven.jpg",
+    title: "Amara Haven",
+    caption: "Thailand’s gentle confinement sanctuary, blending traditional herbal care with modern comfort since 1975.",
+    alt: "Amara Haven confinement centre logo",
+  },
+  {
+    image: "/images/centresLogo(Full)/fullAuspiciousMoonPalace.png",
+    title: "瑞月宫 · Auspicious Moon Palace",
+    caption: "Malaysia’s premier Chinese confinement retreat, cherished by families for 78 years.",
+    alt: "Auspicious Moon Palace confinement centre logo",
+  },
+  {
+    image: "/images/centresLogo(Full)/fullMaisonLumière.jpg",
+    title: "Maison Lumière",
+    caption: "A French-inspired postnatal haven offering refined, restorative care for new mothers since 1967.",
+    alt: "Maison Lumière confinement centre logo",
+  },
+  {
+    image: "/images/centresLogo(Full)/fullChineseImperial.jpg",
+    title: "御福轩 · Imperial Blessings Confinement Retreat",
+    caption: "One of China’s most celebrated confinement centers, honoring 80 years of imperial-style postpartum care.",
+    alt: "Imperial Blessings Confinement Retreat logo",
+  },
+  {
+    image: "/images/centresLogo(Full)/fullMatrutvaIndian.png",
+    title: "Matrutva Postnatal Indian Sanctuary",
+    caption: "Malaysia’s beloved Indian postnatal sanctuary, nurturing mothers with Ayurvedic tradition for 40 years.",
+    alt: "Matrutva Postnatal Indian Sanctuary logo",
   },
 ];
 
@@ -264,6 +304,32 @@ function HomeInformationSections() {
         <p className="mt-8 rounded-xl border border-[#e8ddca] bg-white/60 px-5 py-4 text-sm leading-6 text-[#716959] sm:text-center">
           Inclusions vary by centre. Please check each package for full details.
         </p>
+      </section>
+
+      <section className="-mx-5 bg-[#f3efe5] px-5 py-20 sm:-mx-8 sm:px-8 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Our trusted network"
+            title="Our partner confinement centres"
+          />
+          <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-7 text-[#6e6658] sm:text-lg">
+            Meet the centres we&apos;ve verified and trust.
+          </p>
+          <div className="mt-9 overflow-hidden rounded-[1.75rem] border border-[#e4dac8] bg-white shadow-[0_24px_70px_rgba(81,66,43,0.09)] sm:mt-12">
+            <PolaroidLineCarousel
+              slides={partnerCentres}
+              height="600px"
+              cardWidth={280}
+              sag={42}
+              swing={0.55}
+              autoplay={7500}
+              string="#a68e66"
+              background="#ffffff"
+              ink="#2f4431"
+              ariaLabel="Verified partner confinement centres"
+            />
+          </div>
+        </div>
       </section>
     </>
   );
