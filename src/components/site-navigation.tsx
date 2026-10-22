@@ -6,6 +6,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 import { getCentreNavItems } from "@/lib/home-data";
 import { centres } from "@/lib/centres";
+import { UserMenu } from "@/components/user-menu";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
@@ -105,6 +106,7 @@ export function SiteNavigation() {
           )}
         </div>
 
+        {pathname === "/" && <UserMenu />}
         {isCentrePage && (
           <a
             href={`${getCentreNavItems(activeCentre!.href)[4].href}#enquiry`}

@@ -1,5 +1,61 @@
 @import "tailwindcss";
 
+.auth-shell {
+  --auth-bg: #fbf7ef;
+  --auth-text: #2f4431;
+  --auth-muted: #756d60;
+  --auth-surface: #fffdf8;
+  --auth-border: #dfd7c8;
+  --auth-soft: #edf0e6;
+  --auth-error: #a13d3d;
+  background: var(--auth-bg);
+  color: var(--auth-text);
+  color-scheme: light;
+}
+
+html[data-auth-theme="dark"] .auth-shell {
+  --auth-bg: #19231e;
+  --auth-text: #eee8da;
+  --auth-muted: #b7bbaf;
+  --auth-surface: #222f27;
+  --auth-border: #465248;
+  --auth-soft: #2e3c31;
+  --auth-error: #f3aaa5;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-auth-theme]) .auth-shell {
+    --auth-bg: #19231e;
+    --auth-text: #eee8da;
+    --auth-muted: #b7bbaf;
+    --auth-surface: #222f27;
+    --auth-border: #465248;
+    --auth-soft: #2e3c31;
+    --auth-error: #f3aaa5;
+    color-scheme: dark;
+  }
+}
+
+.auth-serif { font-family: var(--font-cormorant), Georgia, serif; }
+.auth-muted { color: var(--auth-muted); }
+.auth-error { color: var(--auth-error); }
+.auth-story { background: radial-gradient(ellipse at top right, #718367 0%, #40583f 40%, #2f4431 85%); color: #fbf7ef; }
+.auth-input, .auth-select { background: var(--auth-surface); border-color: var(--auth-border); color: var(--auth-text); }
+.auth-input::placeholder { color: var(--auth-muted); opacity: 0.8; }
+.auth-input:focus { outline: 2px solid #8d9f7d; outline-offset: 2px; }
+.auth-input[aria-invalid="true"] { border-color: var(--auth-error); }
+.auth-shell button, .auth-shell a, .auth-shell select { cursor: pointer; }
+.auth-shell :is(button, a, select):focus-visible { outline: 2px solid #8d9f7d; outline-offset: 4px; }
+.auth-emblem, .auth-notice { background: var(--auth-soft); border-color: var(--auth-border); }
+.auth-toggle, .auth-secondary { border-color: var(--auth-border); }
+.auth-toggle [aria-pressed="true"] { background: var(--auth-soft); }
+.auth-primary { background: #2f4431; color: #fbf7ef; box-shadow: 0 8px 20px rgb(47 68 49 / 0.12); }
+.auth-primary:hover:not(:disabled) { background: #40583f; transform: translateY(-1px); }
+html[data-auth-theme="dark"] .auth-primary { background: #b9c9aa; color: #19231e; }
+html[data-auth-theme="dark"] .auth-primary:hover:not(:disabled) { background: #cbd8bf; }
+.auth-link { color: var(--auth-text); font-weight: 500; }
+
 :root {
   --background: #fbf7ef;
   --foreground: #2d2a22;

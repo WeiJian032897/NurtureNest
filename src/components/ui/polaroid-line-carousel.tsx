@@ -225,7 +225,10 @@ function useSlideImages(slides: Slide[]): string[] {
   const key = slides.map((s) => s.image || (s.palette || "dawn") + ":" + (s.seed ?? 1)).join("|")
   const [painted, setPainted] = React.useState(() => slides.map(() => ""))
   React.useEffect(() => {
-    setPainted(slides.map((s, i) => (s.image ? "" : paintLandscape(s.seed ?? i + 1, s.palette || "dawn"))))
+    const frame = requestAnimationFrame(() => {
+      setPainted(slides.map((s, i) => (s.image ? "" : paintLandscape(s.seed ?? i + 1, s.palette || "dawn"))))
+    })
+    return () => cancelAnimationFrame(frame)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key])
   return slides.map((s, i) => s.image || painted[i] || "")
@@ -287,7 +290,7 @@ export default function PolaroidLineCarousel({
   const lastTouch = React.useRef(0)
   const activeRef = React.useRef(0)
   const opts = React.useRef({ sag, swing })
-  opts.current = { sag, swing }
+  React.useEffect(() => { opts.current = { sag, swing } }, [sag, swing])
 
   const spacing = size.cw * 1.08
   const goTo = React.useCallback(

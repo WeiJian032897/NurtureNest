@@ -218,7 +218,7 @@ function HomeInformationSections() {
               >
                 <div className="relative h-48 overflow-hidden bg-[#eef2e8] sm:h-44 xl:h-40">
                   <Image
-                    src={`/images/nurtrureNestHome/${reason.image}`}
+                    src={`/images/nurtureNestHome/${reason.image}`}
                     alt={reason.alt}
                     fill
                     sizes="(min-width: 1280px) 230px, (min-width: 640px) 45vw, 90vw"
@@ -284,7 +284,7 @@ function HomeInformationSections() {
             >
               <div className="relative min-h-36 w-2/5 shrink-0 overflow-hidden bg-[#eef2e8] sm:h-56 sm:w-full">
                 <Image
-                  src={`/images/nurtrureNestHome/${item.image}`}
+                  src={`/images/nurtureNestHome/${item.image}`}
                   alt={item.alt}
                   fill
                   sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 40vw"
