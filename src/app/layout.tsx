@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/auth-provider";
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t='system';try{t=localStorage.getItem('nn-theme')||'system'}catch(e){}document.documentElement.dataset.authTheme=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'})()` }} />
+        <Script id="auth-theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `(function(){var t='system';try{t=localStorage.getItem('nn-theme')||'system'}catch(e){}document.documentElement.dataset.authTheme=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'})()` }} />
       </head>
       <body className="min-h-full flex flex-col"><AuthProvider>{children}</AuthProvider></body>
     </html>
