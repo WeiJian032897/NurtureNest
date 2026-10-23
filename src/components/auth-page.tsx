@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, ArrowRight, LoaderCircle, MailCheck } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
@@ -15,6 +15,8 @@ import { errorKey, loginAccount, registerAccount, resendVerification } from "@/l
 import { useAuth } from "./auth-provider";
 import { AuthLoading } from "./auth-guard";
 import { SignupVerification } from "./signup-verification";
+import { PasswordStrength } from "./ui/password-strength";
+import { getPasswordLength, PASSWORD_MAX, PASSWORD_MIN_ERROR, PASSWORD_MAX_ERROR, passwordSchema } from "@/lib/password-policy";
 
 type Values = { name: string; email: string; password: string; confirmPassword: string };
 type Theme = "system" | "light" | "dark";
@@ -41,12 +43,13 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
   const schema = z.object({
     name: signup && !verification ? z.string().trim().min(1, "nameRequired") : z.string(),
     email: z.string().trim().email("invalidEmail"),
-    password: signup && !verification ? z.string().min(8, "passwordMin") : z.string().min(1, "passwordRequired"),
+    password: signup && !verification ? passwordSchema : z.string().min(1, "passwordRequired"),
     confirmPassword: z.string(),
   }).refine((values) => !signup || verification || values.password === values.confirmPassword, { message: "mismatch", path: ["confirmPassword"] });
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<Values>({
+  const { register, handleSubmit, reset, control, trigger, setError, formState: { errors, touchedFields, isSubmitted } } = useForm<Values>({
     resolver: zodResolver(schema), defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
+  const passwordValue = useWatch({ control, name: "password" });
 
   useEffect(() => {
     active.current = true;
@@ -142,7 +145,8 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
     } catch (error) {
       if (signup && !resend) { ownsSignupSession.current = false; setPendingSignup(false); }
       const key = errorKey(error);
-      setFailure(key);
+      if (key === "weakPassword" && signup) setError("password", { type: "server", message: "passwordPolicyError" }, { shouldFocus: true });
+      else setFailure(key);
       if (key === "tooMany") startCooldown();
     } finally {
       // Resend credentials must be cleared on both success and failure.
@@ -191,20 +195,27 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
             <form className="mt-7 space-y-5" noValidate aria-busy={busy} onSubmit={(event) => { void handleSubmit((values) => submit(values, verification && signup))(event); }}>
               {fields.map((field) => {
                 const password = field === "password" || field === "confirmPassword";
-                const error = errors[field]?.message as AuthTextKey | undefined;
+                const rawError = field === "password" && signup && getPasswordLength(passwordValue) > PASSWORD_MAX ? PASSWORD_MAX_ERROR : errors[field]?.message;
+                const error = (rawError === PASSWORD_MIN_ERROR ? "passwordMin" : rawError === PASSWORD_MAX_ERROR ? "passwordMax" : rawError) as AuthTextKey | undefined;
                 return <div key={field}>
                   <label htmlFor={field} className="mb-2 block text-sm font-medium">{t[field]}</label>
                   <div className="relative">
-                    <input {...register(field)} id={field} type={password ? visible[field] ? "text" : "password" : field === "email" ? "email" : "text"}
+                    <input {...register(field, field === "password" && signup ? {
+                      onBlur: () => { void trigger("password"); },
+                      onChange: () => { if (touchedFields.password || isSubmitted || errors.password) void trigger("password"); },
+                    } : {})} id={field} type={password ? visible[field] ? "text" : "password" : field === "email" ? "email" : "text"}
                       autoComplete={password ? signup ? "new-password" : "current-password" : field === "name" ? "name" : "email"}
                       autoCapitalize={field === "email" ? "none" : undefined} spellCheck={field === "email" || password ? false : undefined}
-                      aria-invalid={Boolean(error)} aria-describedby={error ? `${field}-error` : field === "password" && signup && !verification ? "password-hint" : undefined}
+                      aria-invalid={Boolean(error)} aria-describedby={[error ? `${field}-error` : "", field === "password" && signup && !verification ? "password-hint" : ""].filter(Boolean).join(" ") || undefined}
                       disabled={busy} placeholder={field === "name" ? t.namePlaceholder : field === "email" ? t.emailPlaceholder : undefined}
                       className={`auth-input w-full rounded-xl border px-4 py-3.5 text-sm transition ${password ? "pr-14" : ""}`} />
                     {password && <button type="button" aria-label={visible[field] ? t.hide : t.show} aria-pressed={Boolean(visible[field])} aria-controls={field} className="absolute inset-y-0 right-1 flex w-12 items-center justify-center rounded-lg" onClick={() => setVisible((previous) => ({ ...previous, [field]: !previous[field] }))}>{visible[field] ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}</button>}
                   </div>
                   {error && <p id={`${field}-error`} role="alert" className="auth-error mt-2 text-xs">{t[error]}</p>}
-                  {field === "password" && signup && !verification && !error && <p id="password-hint" className="auth-muted mt-2 text-xs">{t.passwordMin}</p>}
+                  {field === "password" && signup && !verification && <>
+                    <p id="password-hint" className="auth-muted mt-2 text-xs leading-5">{t.passwordHelp}</p>
+                    <PasswordStrength value={passwordValue} language={language} className="mt-3" />
+                  </>}
                 </div>;
               })}
               <button type="submit" disabled={busy || (verification && signup && remaining > 0)} className="auth-primary mt-2 flex w-full items-center justify-center gap-3 rounded-full px-5 py-4 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-55">

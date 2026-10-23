@@ -59,7 +59,8 @@ export function errorKey(error: unknown) {
     case "auth/invalid-credential":
     case "auth/wrong-password":
     case "auth/user-not-found": return "invalidCredentials";
-    case "auth/weak-password": return "weakPassword";
+    case "auth/weak-password":
+    case "auth/password-does-not-meet-requirements": return "weakPassword";
     case "auth/too-many-requests": return "tooMany";
     case "auth/network-request-failed": return "network";
     default: return "generic";

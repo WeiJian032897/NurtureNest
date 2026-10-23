@@ -8,6 +8,8 @@
   --auth-border: #dfd7c8;
   --auth-soft: #edf0e6;
   --auth-error: #a13d3d;
+  --auth-strength-fair: #8d7950;
+  --auth-strength-good: #40583f;
   background: var(--auth-bg);
   color: var(--auth-text);
   color-scheme: light;
@@ -21,6 +23,8 @@ html[data-auth-theme="dark"] .auth-shell {
   --auth-border: #465248;
   --auth-soft: #2e3c31;
   --auth-error: #f3aaa5;
+  --auth-strength-fair: #c5aa70;
+  --auth-strength-good: #b9c9aa;
   color-scheme: dark;
 }
 
@@ -33,6 +37,8 @@ html[data-auth-theme="dark"] .auth-shell {
     --auth-border: #465248;
     --auth-soft: #2e3c31;
     --auth-error: #f3aaa5;
+    --auth-strength-fair: #c5aa70;
+    --auth-strength-good: #b9c9aa;
     color-scheme: dark;
   }
 }
