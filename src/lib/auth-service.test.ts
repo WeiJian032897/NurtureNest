@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { User } from "firebase/auth";
 
 const mocks = vi.hoisted(() => ({
   setPersistence: vi.fn(), inMemoryPersistence: "memory", browserLocalPersistence: "local",
@@ -53,13 +54,15 @@ describe("account lifecycle", () => {
   });
   it("denies unverified login and signs out without touching Firestore", async () => {
     mocks.signInWithEmailAndPassword.mockResolvedValue({ user: { ...user, emailVerified: false } });
-    expect(await loginAccount(user.email, "password123")).toBe(false);
+    expect((await loginAccount(user.email, "password123")).emailVerified).toBe(false);
     expect(mocks.getDoc).not.toHaveBeenCalled();
     expect(mocks.signOut).toHaveBeenCalled();
+    expect(mocks.setPersistence).toHaveBeenCalledWith({}, "memory");
+    expect(mocks.setPersistence).not.toHaveBeenCalledWith({}, "local");
   });
   it("repairs missing profiles with email prefix fallback before allowing login", async () => {
     mocks.signInWithEmailAndPassword.mockResolvedValue({ user: { ...user, displayName: null } });
-    expect(await loginAccount(user.email, "password123")).toBe(true);
+    expect((await loginAccount(user.email, "password123")).emailVerified).toBe(true);
     expect(mocks.setDoc).toHaveBeenCalledWith("users/test-uid", { name: "parent", email: user.email, createdAt: "server-time" });
     expect(mocks.signOut).not.toHaveBeenCalled();
     expect(mocks.setPersistence).toHaveBeenCalledWith({}, "local");
@@ -77,11 +80,12 @@ describe("account lifecycle", () => {
   it("signs out even when resend is rate limited", async () => {
     mocks.signInWithEmailAndPassword.mockResolvedValue({ user: { ...user, emailVerified: false } });
     mocks.sendEmailVerification.mockRejectedValue({ code: "auth/too-many-requests" });
-    await expect(resendVerification(user.email, "password123")).rejects.toEqual({ code: "auth/too-many-requests" });
+    await expect(resendVerification({ ...user, emailVerified: false } as User)).rejects.toEqual({ code: "auth/too-many-requests" });
+    expect(mocks.signInWithEmailAndPassword).not.toHaveBeenCalled();
     expect(mocks.signOut).toHaveBeenCalled();
   });
   it("does not retain a verified session from resend", async () => {
-    expect(await resendVerification(user.email, "password123")).toBe(true);
+    expect(await resendVerification(user as User)).toBe(true);
     expect(mocks.sendEmailVerification).not.toHaveBeenCalled();
     expect(mocks.signOut).toHaveBeenCalled();
   });
@@ -89,5 +93,16 @@ describe("account lifecycle", () => {
     expect(errorKey(new Error("internal details"))).toBe("generic");
     expect(errorKey({ code: "auth/invalid-credential" })).toBe("invalidCredentials");
     expect(errorKey({ code: "auth/network-request-failed" })).toBe("network");
+  });
+  it("resends directly to the user returned by login after sign-out", async () => {
+    const unverified = { ...user, emailVerified: false } as User;
+    mocks.signInWithEmailAndPassword.mockResolvedValue({ user: unverified });
+    const recipient = await loginAccount(user.email, "password123");
+    expect(recipient).toBe(unverified);
+    expect(mocks.signOut).toHaveBeenCalledTimes(1);
+    await resendVerification(recipient);
+    expect(mocks.sendEmailVerification).toHaveBeenCalledWith(unverified);
+    expect(mocks.signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
+    expect(mocks.signOut).toHaveBeenCalledTimes(2);
   });
 });

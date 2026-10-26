@@ -31,20 +31,22 @@ export async function registerAccount(name: string, email: string, password: str
 export async function loginAccount(email: string, password: string) {
   let complete = false;
   try {
-    await setPersistence(auth, browserLocalPersistence);
+    // Do not persist an unverified login, even while it is being checked.
+    await setPersistence(auth, inMemoryPersistence);
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-    if (!user.emailVerified) return false;
+    if (!user.emailVerified) return user;
     await ensureUserDocument(user);
+    await setPersistence(auth, browserLocalPersistence);
     complete = true;
-    return true;
+    return user;
   } finally {
     if (!complete) await signOut(auth);
   }
 }
 
-export async function resendVerification(email: string, password: string) {
+export async function resendVerification(user: User) {
   try {
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    // The User retains its token in memory after signOut; no password login is needed.
     if (!user.emailVerified) await sendEmailVerification(user);
     return user.emailVerified;
   } finally {

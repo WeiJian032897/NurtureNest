@@ -46,9 +46,9 @@ The project combines responsive presentation pages with Firebase email/password 
 - Firebase email/password registration, login, verification, logout, and Firestore user profiles
 - Registration flow: create account, update display name, create `users/{uid}`, and send verification email
 - Registration retains an in-memory session for direct resend; refresh discards it and returns to the registration form
-- Verification polling every four seconds, paused while the document is hidden and stopped on verification or unmount
+- Shared email-verification watcher for signup and unverified login: checks every four seconds, pauses while hidden, checks immediately when visible again, and stops on verification or unmount. Signup shows congratulations; login keeps the entered credentials and asks the user to click Log in without signing in automatically.
 - Returning to login or leaving the registration screen signs out the temporary session
-- Login rejects unverified users; its resend flow signs in with the entered credentials, sends verification, then signs out
+- Login rejects and signs out unverified users while preserving the form inputs. Resend uses the returned Firebase user object held only in page memory, without another password login, and signs out again on completion or failure.
 - Resend buttons have a 60-second cooldown and friendly rate-limit/error feedback
 - Registration continues if profile creation or verification-mail delivery fails; resend remains available, and verified login repairs missing profiles
 - Reusable authentication provider/guard and a standalone user menu with name fallback and logout
@@ -57,7 +57,7 @@ The project combines responsive presentation pages with Firebase email/password 
 - Overlength errors appear immediately; minimum-length errors appear after blur or submit
 - Password meter animations, reduced-motion support, accessible meter semantics, and debounced screen-reader announcements
 - English / Simplified Chinese and system / light / night appearance for authentication pages, with preferences saved locally
-- Existing password visibility controls, empty-form resets, and credential cleanup after login/resend
+- Existing password visibility controls and empty-form resets on page entry/exit and successful login; unverified login and resend preserve the current form inputs
 - Nurture Nest logo favicon and early theme initialization through `next/script`
 
 #### Demo / Placeholder Content (No backend wiring)
@@ -146,7 +146,7 @@ Restart the dev server after changing environment variables or dependencies. To 
 
 The `test` script is configured; there is no separate `typecheck` script. Vitest configuration is in `vitest.config.mts` and supports the `@/` alias and per-file jsdom tests.
 
-The last implementation checks passed lint (with four existing image-optimization warnings), TypeScript, 36 tests, and the production build. Tests use mocked Firebase services; passing them does not verify real email delivery or live backend permissions. Manually check registration, email verification, resend/cooldown, login, logout, and home protection using a test account.
+The last implementation checks passed lint (with four existing image-optimization warnings), TypeScript, 45 tests, and the production build. Tests use mocked Firebase services; passing them does not verify real email delivery or live backend permissions. Manually check registration, email verification, resend/cooldown, login, logout, and home protection using a test account.
 
 ## Project Structure
 
@@ -162,7 +162,8 @@ The last implementation checks passed lint (with four existing image-optimizatio
 | `src/components/platform-page.tsx` | Nurture Nest platform presentation |
 | `src/components/auth-page.tsx` | Shared login/signup form and authentication layout |
 | `src/components/auth-provider.tsx`, `src/components/auth-guard.tsx` | Authentication state and reusable page protection |
-| `src/components/signup-verification.tsx` | Registration resend, polling, and congratulations UI |
+| `src/components/signup-verification.tsx` | Registration resend and congratulations UI |
+| `src/hooks/use-email-verification-watcher.ts` | Shared visibility-aware verification polling for signup and login |
 | `src/components/user-menu.tsx` | User name display and logout |
 | `src/components/ui/` | Reusable UI, including password strength and image effects |
 | `src/lib/firebase.ts` | Singleton Firebase app setup; exports `auth` and `db` |

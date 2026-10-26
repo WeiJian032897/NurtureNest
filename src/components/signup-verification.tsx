@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { sendEmailVerification, type User } from "firebase/auth";
 import { Check, LoaderCircle, MailCheck } from "lucide-react";
+import { useEmailVerificationWatcher } from "@/hooks/use-email-verification-watcher";
 import { auth } from "@/lib/firebase";
 import { errorKey } from "@/lib/auth-service";
 import { authDictionary, formatVerificationSent, type AuthLanguage, type AuthTextKey } from "@/lib/auth-dictionary";
@@ -12,35 +13,12 @@ export function SignupVerification({ user, language, remaining, startCooldown, o
   startCooldown: () => void; onLeave: () => Promise<void>;
 }) {
   const t = authDictionary[language];
-  const [verified, setVerified] = useState(false);
+  const { verified, error: verificationError } = useEmailVerificationWatcher(user);
   const [busy, setBusy] = useState(false);
   const [failure, setFailure] = useState<AuthTextKey | null>(null);
   const lock = useRef(false);
 
-  useEffect(() => {
-    let active = true;
-    let checking = false;
-    const interval = window.setInterval(async () => {
-      if (document.hidden || checking || lock.current) return;
-      if (auth.currentUser?.uid !== user.uid) {
-        window.clearInterval(interval);
-        void onLeave().catch(() => { if (active) setFailure("generic"); });
-        return;
-      }
-      checking = true;
-      try {
-        await user.reload();
-        if (active && user.emailVerified) {
-          window.clearInterval(interval);
-          setFailure(null);
-          setVerified(true);
-        }
-      } catch (error) {
-        if (active) setFailure(errorKey(error));
-      } finally { checking = false; }
-    }, 4000);
-    return () => { active = false; window.clearInterval(interval); };
-  }, [user, onLeave]);
+  const displayedFailure = failure ?? (!verified && verificationError ? errorKey(verificationError) : null);
 
   async function leave() {
     if (lock.current) return;
@@ -66,7 +44,7 @@ export function SignupVerification({ user, language, remaining, startCooldown, o
       <h2 className="auth-serif text-4xl leading-tight sm:text-5xl">{verified ? t.congratulations : t.sentTitle}</h2>
       <p className="auth-muted mt-4 break-words text-sm leading-7">{verified ? t.verifiedWelcome : formatVerificationSent(language, user.email)}</p>
     </div>
-    {failure && <p role="alert" className="auth-error mt-5 text-sm">{t[failure]}</p>}
+    {displayedFailure && <p role="alert" className="auth-error mt-5 text-sm">{t[displayedFailure]}</p>}
     <button type="button" disabled={busy || (!verified && remaining > 0)} onClick={() => { void (verified ? leave() : resend()); }} className="auth-primary mt-8 flex w-full items-center justify-center gap-3 rounded-full px-5 py-4 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-55">
       {busy ? <><LoaderCircle size={18} aria-hidden="true" className="animate-spin" />{t.working}</> : verified ? t.goToLogin : remaining > 0 ? `${t.resendIn} ${remaining}${t.seconds}` : t.resend}
     </button>

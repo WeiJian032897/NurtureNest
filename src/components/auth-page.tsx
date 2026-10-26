@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Eye, EyeOff, ArrowRight, LoaderCircle, MailCheck } from "lucide-react";
+import { Eye, EyeOff, ArrowRight, LoaderCircle } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { signOut, type User } from "firebase/auth";
+import { useEmailVerificationWatcher } from "@/hooks/use-email-verification-watcher";
 import { auth } from "@/lib/firebase";
 import { authDictionary, type AuthLanguage, type AuthTextKey } from "@/lib/auth-dictionary";
 import { errorKey, loginAccount, registerAccount, resendVerification } from "@/lib/auth-service";
@@ -32,6 +33,9 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
   const lock = useRef(false);
   const active = useRef(false);
   const ownsSignupSession = useRef(false);
+  const unverifiedLoginUser = useRef<User | null>(null);
+  const [watchedLoginUser, setWatchedLoginUser] = useState<User | null>(null);
+  const { verified: loginEmailVerified } = useEmailVerificationWatcher(watchedLoginUser);
   const [signupUser, setSignupUser] = useState<User | null>(null);
   const cooldownUntil = useRef(0);
   const [verification, setVerification] = useState(false);
@@ -55,6 +59,10 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
     active.current = true;
     return () => {
       active.current = false;
+      if (unverifiedLoginUser.current) {
+        unverifiedLoginUser.current = null;
+        void signOut(auth).catch(() => { /* Unverified login already signed out in the service. */ });
+      }
       if (ownsSignupSession.current) {
         ownsSignupSession.current = false;
         void signOut(auth).then(() => setPendingSignup(false)).catch(() => { /* Guard remains closed if cleanup fails. */ });
@@ -73,11 +81,7 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
   useEffect(() => {
     // Also runs when Next.js reactivates a preserved page after navigation.
     reset();
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) reset();
-    });
     return () => {
-      unsubscribe();
       // Do not leave credentials in an inactive, cached form.
       reset();
     };
@@ -121,15 +125,26 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
     try { localStorage.setItem("nn-resend-until", String(cooldownUntil.current)); } catch { /* Use in-memory cooldown. */ }
   }
 
-  async function submit(values: Values, resend = false) {
-    if (lock.current || (resend && remaining > 0)) return;
+  async function resendLoginVerification() {
+    const recipient = unverifiedLoginUser.current;
+    if (lock.current || remaining > 0 || !recipient || loginEmailVerified) return;
+    lock.current = true; setBusy(true); setProcessing(true); setFailure(null);
+    startCooldown();
+    try {
+      const verified = await resendVerification(recipient);
+      if (active.current) setNotice(verified ? "verified" : "sent");
+    } catch (error) {
+      if (active.current) setFailure(errorKey(error));
+    } finally {
+      lock.current = false; setBusy(false); setProcessing(false);
+    }
+  }
+
+  async function submit(values: Values) {
+    if (lock.current) return;
     lock.current = true; setBusy(true); setProcessing(true); setFailure(null); setNotice(null);
     try {
-      if (resend) {
-        startCooldown();
-        const verified = await resendVerification(values.email, values.password);
-        setNotice(verified ? "verified" : "sent");
-      } else if (signup) {
+      if (signup) {
         ownsSignupSession.current = true;
         setPendingSignup(true);
         const createdUser = await registerAccount(values.name, values.email, values.password);
@@ -138,25 +153,28 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
         reset();
         startCooldown();
       } else {
-        const verified = await loginAccount(values.email, values.password);
-        if (verified) { reset(); router.replace("/"); }
-        else { setVerification(true); setNotice("unverified"); }
+        unverifiedLoginUser.current = null;
+        setWatchedLoginUser(null);
+        setVerification(false);
+        const loginUser = await loginAccount(values.email, values.password);
+        if (!active.current) { await signOut(auth); return; }
+        if (loginUser.emailVerified) { reset(); router.replace("/"); }
+        else { unverifiedLoginUser.current = loginUser; setWatchedLoginUser(loginUser); setVerification(true); setNotice("unverified"); }
       }
     } catch (error) {
-      if (signup && !resend) { ownsSignupSession.current = false; setPendingSignup(false); }
+      if (signup) { ownsSignupSession.current = false; setPendingSignup(false); }
       const key = errorKey(error);
       if (key === "weakPassword" && signup) setError("password", { type: "server", message: "passwordPolicyError" }, { shouldFocus: true });
       else setFailure(key);
       if (key === "tooMany") startCooldown();
     } finally {
-      // Resend credentials must be cleared on both success and failure.
-      if (resend) reset();
       lock.current = false; setBusy(false); setProcessing(false);
     }
   }
 
   if (!ready || loading || (user?.emailVerified && !busy && !pendingSignup)) return <AuthLoading />;
 
+  const displayedNotice = loginEmailVerified ? "loginVerified" : notice;
   const fields: (keyof Values)[] = signup && !verification ? ["name", "email", "password", "confirmPassword"] : ["email", "password"];
   return <main className="auth-shell min-h-dvh" lang={language === "zh" ? "zh-CN" : "en"}>
     <div className="mx-auto grid min-h-dvh max-w-[1600px] lg:grid-cols-[1.05fr_1fr]">
@@ -187,12 +205,12 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-8 lg:py-12">
           {signupUser && signup && pendingSignup ? <SignupVerification user={signupUser} language={language} remaining={remaining} startCooldown={startCooldown} onLeave={leaveSignup} /> : (
           <div className="animate-rise">
-            <span className="auth-emblem mb-6 inline-flex size-12 items-center justify-center rounded-full">{verification ? <MailCheck aria-hidden="true" /> : <Image src="/images/logoNurtureNest_v2.jpg" alt="Nurture Nest" width={48} height={48} className="size-12 rounded-full bg-[#fbf7ef] object-contain" />}</span>
+            <span className="auth-emblem mb-6 inline-flex size-12 items-center justify-center rounded-full"><Image src="/images/logoNurtureNest_v2.jpg" alt="Nurture Nest" width={48} height={48} className="size-12 rounded-full bg-[#fbf7ef] object-contain" /></span>
             <h2 className="auth-serif text-4xl leading-tight sm:text-5xl">{verification && signup ? t.sentTitle : signup ? t.signupTitle : t.loginTitle}</h2>
-            <p className="auth-muted mt-4 text-sm leading-7">{verification ? t.resendHint : signup ? t.signupBody : t.loginBody}</p>
-            <div aria-live="polite" aria-atomic="true">{notice && <p className="auth-notice mt-5 rounded-xl border p-4 text-sm leading-6">{t[notice]}</p>}</div>
-            {failure && <p role="alert" className="auth-error mt-5 text-sm">{t[failure]}</p>}
-            <form className="mt-7 space-y-5" noValidate aria-busy={busy} onSubmit={(event) => { void handleSubmit((values) => submit(values, verification && signup))(event); }}>
+            <p className="auth-muted mt-4 text-sm leading-7">{signup ? t.signupBody : t.loginBody}</p>
+            <div aria-live="polite" aria-atomic="true">{displayedNotice && <p className="auth-notice mt-5 rounded-xl border p-4 text-sm leading-6">{t[displayedNotice]}</p>}</div>
+            {failure && !loginEmailVerified && <p role="alert" className="auth-error mt-5 text-sm">{t[failure]}</p>}
+            <form className="mt-7 space-y-5" noValidate aria-busy={busy} onSubmit={(event) => { void handleSubmit(submit)(event); }}>
               {fields.map((field) => {
                 const password = field === "password" || field === "confirmPassword";
                 const rawError = field === "password" && signup && getPasswordLength(passwordValue) > PASSWORD_MAX ? PASSWORD_MAX_ERROR : errors[field]?.message;
@@ -221,7 +239,7 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
               <button type="submit" disabled={busy || (verification && signup && remaining > 0)} className="auth-primary mt-2 flex w-full items-center justify-center gap-3 rounded-full px-5 py-4 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-55">
                 {busy ? <><LoaderCircle size={18} aria-hidden="true" className="animate-spin" />{t.working}</> : verification && signup ? remaining > 0 ? `${t.resendIn} ${remaining}${t.seconds}` : t.resend : <>{signup ? t.signup : t.login}<ArrowRight size={17} aria-hidden="true" /></>}
               </button>
-              {verification && !signup && <button type="button" disabled={busy || remaining > 0} className="auth-secondary w-full rounded-full border px-5 py-3 text-sm disabled:opacity-50" onClick={() => { void handleSubmit((values) => submit(values, true))(); }}>{remaining > 0 ? `${t.resendIn} ${remaining}${t.seconds}` : t.resend}</button>}
+              {verification && !signup && !loginEmailVerified && <button type="button" disabled={busy || remaining > 0} className="auth-secondary w-full rounded-full border px-5 py-3 text-sm disabled:opacity-50" onClick={() => { void resendLoginVerification(); }}>{remaining > 0 ? `${t.resendIn} ${remaining}${t.seconds}` : t.resend}</button>}
             </form>
             <p className="auth-muted mt-7 text-center text-sm">{signup && verification ? "" : signup ? t.hasAccount : t.noAccount}{" "}<Link className="auth-link rounded underline underline-offset-4" href={signup ? "/login" : "/signup"} onClick={(event) => { if (busy) event.preventDefault(); }}>{signup ? verification ? t.back : t.login : t.signup}</Link></p>
           </div>
