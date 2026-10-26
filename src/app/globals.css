@@ -47,6 +47,26 @@ html[data-auth-theme="dark"] .auth-shell {
 .auth-muted { color: var(--auth-muted); }
 .auth-error { color: var(--auth-error); }
 .auth-story { background: radial-gradient(ellipse at top right, #718367 0%, #40583f 40%, #2f4431 85%); color: #fbf7ef; }
+
+@media (min-width: 64rem) {
+  .auth-story-photo {
+    max-height: min(36dvh, 22rem);
+  }
+}
+
+@media (min-width: 64rem) and (max-height: 40rem) {
+  .auth-story-frame { padding: 1rem; }
+  .auth-story { gap: 1rem; padding: 1.5rem; }
+  .auth-story-content h1 { font-size: 2rem; }
+  .auth-story-content > p { line-height: 1.5; }
+  .auth-story-photo { margin-top: 1rem; }
+}
+
+@media (min-width: 64rem) and (max-height: 30rem) {
+  .auth-story-content { flex: 0 0 auto; }
+  .auth-story-photo { display: none; }
+  .auth-story { overflow-y: auto; }
+}
 .auth-input, .auth-select { background: var(--auth-surface); border-color: var(--auth-border); color: var(--auth-text); }
 .auth-input::placeholder { color: var(--auth-muted); opacity: 0.8; }
 .auth-input:focus { outline: 2px solid #8d9f7d; outline-offset: 2px; }

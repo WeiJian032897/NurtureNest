@@ -177,22 +177,24 @@ export function AuthPage({ mode }: { mode: "login" | "signup" }) {
   const displayedNotice = loginEmailVerified ? "loginVerified" : notice;
   const fields: (keyof Values)[] = signup && !verification ? ["name", "email", "password", "confirmPassword"] : ["email", "password"];
   return <main className="auth-shell min-h-dvh" lang={language === "zh" ? "zh-CN" : "en"}>
-    <div className="mx-auto grid min-h-dvh max-w-[1600px] lg:grid-cols-[1.05fr_1fr]">
-      <aside className={`auth-story relative m-4 flex flex-col ${signup ? "gap-8 px-7 pt-10 pb-7 sm:px-12 sm:pt-16 sm:pb-12" : "justify-between p-7 sm:p-12"} overflow-hidden rounded-[2rem] sm:m-6 lg:min-h-[calc(100dvh-3rem)]`}>
-        <div className="relative z-10 flex items-center gap-3"><Image src="/images/logoNurtureNest_v2.jpg" alt="" width={40} height={40} className="size-10 shrink-0 rounded-full bg-[#fbf7ef] object-contain" /><span className="auth-serif text-xl tracking-[0.18em]">NURTURE NEST</span></div>
-        <div className={`relative z-10 ${signup ? "@container flex w-full flex-1 flex-col justify-center gap-6 sm:gap-8" : "py-10 lg:py-16"}`}>
-          <p className={`${signup ? "" : "mb-5"} text-xs font-medium uppercase tracking-[0.2em] opacity-80`}>{t.eyebrow}</p>
-          <h1 className={`auth-serif leading-[1.13] ${signup ? "whitespace-nowrap text-[clamp(1rem,10cqw,3.75rem)]" : "whitespace-pre-line text-4xl sm:text-5xl xl:text-6xl"}`}>{t.brandTitle}</h1>
-          <p className={`${signup ? "" : "mt-6"} max-w-sm text-sm leading-7 opacity-85`}>{t.brandBody}</p>
-          <div className={`relative ${signup ? "aspect-[6/5] w-full max-w-sm shrink-0 lg:aspect-auto lg:h-64" : "mt-10 hidden h-64 max-w-sm lg:block"} overflow-hidden rounded-t-[10rem] rounded-b-2xl border border-white/25 xl:h-80`}>
+    <div className="mx-auto grid min-h-dvh max-w-[1600px] lg:grid-cols-[1.05fr_1fr] lg:items-start">
+      <div className="auth-story-frame p-4 sm:p-6 lg:sticky lg:top-0 lg:h-dvh lg:self-start">
+      <aside className="auth-story relative flex flex-col gap-7 overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:h-full lg:gap-[clamp(1rem,3dvh,2rem)] lg:p-[clamp(1.5rem,4dvh,3rem)]">
+        <div className="relative z-10 flex shrink-0 items-center gap-3"><Image src="/images/logoNurtureNest_v2.jpg" alt="" width={40} height={40} className="size-10 shrink-0 rounded-full bg-[#fbf7ef] object-contain" /><span className="auth-serif text-lg tracking-[0.16em] sm:text-xl">NURTURE NEST</span></div>
+        <div className="auth-story-content relative z-10 flex min-h-0 flex-1 flex-col justify-center">
+          <p className="shrink-0 max-w-sm text-[10px] font-semibold uppercase leading-relaxed tracking-[0.16em] opacity-75 sm:text-[11px]">{t.eyebrow}</p>
+          <h1 className="auth-serif mt-4 text-[clamp(2rem,3.5vw,3.75rem)] leading-[1.08] tracking-[-0.025em] [text-wrap:balance]">{t.brandTitle}</h1>
+          <p className="mt-4 shrink-0 max-w-sm text-sm leading-[1.75] opacity-85">{t.brandBody}</p>
+          <div className="auth-story-photo relative mt-6 hidden min-h-0 w-full max-w-sm flex-1 overflow-hidden rounded-t-[10rem] rounded-b-2xl border border-white/25 lg:block">
             <Image src="/images/nurtureNestHome/happyMother.jpg" alt="" fill sizes="384px" className="object-cover" priority />
           </div>
         </div>
-        <p className={`relative z-10 text-xs tracking-wide opacity-75 ${signup ? "shrink-0" : "hidden lg:block"}`}>{t.caption}</p>
+        <p className="relative z-10 hidden shrink-0 text-[11px] leading-5 tracking-wide opacity-65 lg:block">{t.caption}</p>
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -bottom-40 size-[32rem] rounded-full border border-white/10" />
         <div aria-hidden="true" className="pointer-events-none absolute -right-16 -bottom-24 size-[32rem] rounded-full border border-white/10" />
       </aside>
-      <section className="flex flex-col px-6 pb-10 sm:px-12 lg:px-14 xl:px-20">
+      </div>
+      <section className="flex flex-col px-6 pb-10 sm:px-12 lg:min-h-dvh lg:px-14 xl:px-20">
         <div className="flex flex-wrap items-center justify-end gap-3 py-6 text-xs">
           <div className="auth-toggle flex rounded-full border p-1" role="group" aria-label={t.language}>
             {(["en", "zh"] as const).map((value) => <button key={value} type="button" aria-pressed={language === value} className="rounded-full px-3 py-2" onClick={() => { setLanguage(value); try { localStorage.setItem("nn-language", value); } catch {} }}>{value === "en" ? "EN" : "中文"}</button>)}
