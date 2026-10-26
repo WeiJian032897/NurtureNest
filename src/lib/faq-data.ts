@@ -12,7 +12,7 @@ export const faqs: FaqItem[] = [
     answerEn:
       "Jade & Bloom is a premium postnatal care and wellness centre in Kuala Lumpur, thoughtfully designed to support mothers through recovery while providing attentive newborn care. With refined accommodation, personalised services and a tranquil lakeside setting, we create a nurturing environment for the entire family.",
     answerCn:
-      "Jade & Bloom 是一家位于吉隆坡的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验，",
+      "Jade & Bloom 是一家位于吉隆坡的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验。",
   },
   {
     questionEn:

@@ -379,7 +379,7 @@ function FeaturedRoomSection() {
       "A comfortable space where a new mother can relax, recover, and restore her vitality after childbirth.",
       "Professional 24-hour infant care",
       "Thoughtful room layout for everyday family needs",
-      "Includes a variety of nutritious breakfast, lunch, afternoon tea, and dinner options, thoughtfully designed for pregnant women, baby, and their families.",
+      "Includes a variety of nutritious breakfast, lunch, afternoon tea, and dinner options, thoughtfully designed for new mothers, baby, and their families.",
     ],
     price: "RM 49,999",
     priceNote: "tax included",

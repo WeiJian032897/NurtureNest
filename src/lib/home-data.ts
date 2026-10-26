@@ -52,8 +52,8 @@ export const rooms = [
       "More spacious sleeping and activity areas",
       "A separate or semi-separate relaxation nook",
       "Ample storage and shelving space",
-      "Seating to accommodate a companion",
-      "Superior natural light, views, or spatial layout (depending on the specific design)",
+      "Seating to accommodate two companions",
+      "Superior natural light, views, or spatial layout for a calmer atmosphere",
     ],
     designConcept:
       "Evoking the feel of a boutique hotel suite, with the added value reflected in tangible space or amenities.",
@@ -68,9 +68,9 @@ export const rooms = [
     features: [
       "Larger living area",
       "Separate living room or clearly defined relaxation zone",
-      "Layout conducive to extended stays with a partner",
+      "Layout conducive to extended stays with partners",
       "Ample space for baby care and storage",
-      "Option for a separate dining area or enhanced views",
+      "Separate dining area or enhanced views",
     ],
     designConcept:
       "Quiet, private, and refined. The focus is on adapting the space to family life rather than simply pursuing lavish décor.",
@@ -101,7 +101,7 @@ export const accommodationComparison = [
   {
     dimension: "Family Companionship",
     standard: "For short-term travelers",
-    jadeAndBloom: "Space for a partner or an approved family member to accompany the traveler",
+    jadeAndBloom: "Space for your partner or approved family members to stay with you",
   },
   {
     dimension: "Privacy",
@@ -111,7 +111,7 @@ export const accommodationComparison = [
   {
     dimension: "Service Contact",
     standard: "General Room Service",
-    jadeAndBloom: "Specific staff contact details can be configured",
+    jadeAndBloom: "A dedicated handset in every room to reach our care team at any time",
   },
 ];
 
