@@ -21,8 +21,8 @@ export function SiteNavigation() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#e8ddca]/80 bg-[#fbf7ef]/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-4 lg:px-10">
-        <div className="flex items-center gap-3 md:justify-self-start">
+      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-4 lg:px-10">
+        <div className="flex items-center gap-3 xl:justify-self-start">
           {isCentrePage && (
             <Link
               href="/"
@@ -62,12 +62,12 @@ export function SiteNavigation() {
               <img
                 src={isCentrePage ? "/images/centresLogo/jadeBloomLogo.jpg" : "/images/logoNurtureNest_v2.jpg"}
                 alt={isCentrePage ? "Jade & Bloom logo" : "Nurture Nest logo"}
-                className={`${isCentrePage ? "h-16 w-24 object-contain" : "h-14 w-auto"} transition-transform duration-300 group-hover:scale-105`}
+                className={`${isCentrePage ? "h-12 w-14 object-contain sm:h-16 sm:w-24" : "h-14 w-auto"} transition-transform duration-300 group-hover:scale-105`}
               />
             </Link>
             {isCentrePage ? (
               <span
-                className="whitespace-nowrap font-serif text-[27px] font-medium tracking-[0.035em] text-[#2f4431] sm:text-[30px]"
+                className="whitespace-nowrap font-serif text-[20px] font-medium tracking-[0.035em] text-[#2f4431] sm:text-[30px]"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Jade <span className="italic text-[#8d7950]">&amp;</span> Bloom
@@ -83,15 +83,15 @@ export function SiteNavigation() {
           </div>
         </div>
 
-        <div className="order-3 flex w-full flex-wrap items-center gap-2 pt-2 text-[15px] font-medium text-[#6e6658] md:order-none md:w-auto md:justify-self-center md:pt-0">
+        <div className="order-3 flex w-full items-center justify-center gap-1 pt-2 text-[13px] font-medium text-[#6e6658] sm:text-[15px] xl:order-none xl:w-auto xl:justify-self-center xl:pt-0">
           {navigationItems.map((item) => {
             const isActive = item.href === "/" ? pathname === "/" : pathname === item.href;
 
-            return <Link key={item.href} href={item.href} aria-current={isActive ? "page" : undefined} className={`rounded-full px-5 py-2.5 transition duration-200 ${focusRing} ${isActive ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>{item.label}</Link>;
+            return <Link key={item.href} href={item.href} aria-current={isActive ? "page" : undefined} className={`rounded-full px-3 py-2.5 transition duration-200 sm:px-5 ${focusRing} ${isActive ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>{item.label}</Link>;
           })}
           {!isCentrePage && (
             <details className="group relative">
-              <summary className={`flex cursor-pointer list-none items-center gap-2 rounded-full px-5 py-2.5 transition duration-200 [&::-webkit-details-marker]:hidden ${focusRing} ${pathname.startsWith("/centres") ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>
+              <summary className={`flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-2.5 transition duration-200 sm:px-5 [&::-webkit-details-marker]:hidden ${focusRing} ${pathname.startsWith("/centres") ? "bg-[#2f4431] text-white shadow-sm" : "hover:-translate-y-0.5 hover:bg-white/70 hover:text-[#40563f]"}`}>
                 Centres <span aria-hidden="true" className="text-[10px] transition-transform group-open:rotate-180">▼</span>
               </summary>
               <div className="absolute left-0 top-full z-50 mt-2 min-w-56 rounded-2xl border border-[#e8ddca] bg-[#fbf7ef] p-2 shadow-xl">
@@ -110,7 +110,7 @@ export function SiteNavigation() {
         {isCentrePage && (
           <a
             href={`${getCentreNavItems(activeCentre!.href)[4].href}#enquiry`}
-            className={`order-2 justify-self-end rounded-full border border-[#2f4431] bg-[#2f4431] px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#253827] md:order-none ${focusRing}`}
+            className={`order-2 justify-self-end rounded-full border border-[#2f4431] bg-[#2f4431] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#253827] sm:px-6 sm:py-3 sm:text-base xl:order-none ${focusRing}`}
           >
             Enquire
           </a>
