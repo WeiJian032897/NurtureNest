@@ -4,14 +4,17 @@
 
 NURTURE NEST is a Next.js (App Router) confinement care discovery platform for families in Malaysia. It presents the Nurture Nest platform and individual centre pages, currently including Jade & Bloom in Setapak, Kuala Lumpur.
 
-The project combines responsive presentation pages with Firebase email/password authentication, email verification, and basic user profiles in Firestore. Booking, payment, CRM, and CMS integrations are not implemented.
+The project combines responsive presentation pages, interactive family testimonials, and a dedicated Jade & Bloom care page with Firebase email/password authentication, email verification, and basic user profiles in Firestore. Booking, payment, CRM, and CMS integrations are not implemented.
 
 ## Pages & Features
 
 ### Pages
 
 - `/` (Nurture Nest Home)
-  - Animated image hero, platform benefits, and postnatal care information
+  - Animated curved image hero, five platform benefits, a three-step introduction, and six typical confinement-package inclusions
+  - Six partner centres displayed in a draggable, gently swinging Polaroid carousel, with automatic switching every 7.5 seconds and arrow/keyboard controls
+  - “Kind words from our families” section after the partner centres: 25 local photos arranged in an interactive rotating sphere on a pure-white background
+  - Photo selection opens a cream testimonial dialog with a large, centred square photo, name, centre, star rating, title, and full review; previous/next controls also allow browsing all 25 stories
   - Protected by `AuthGuard`: only signed-in, email-verified users can view the page
   - Loading screen while Firebase resolves authentication; no home content flash
   - User name and Logout controls in the home navigation
@@ -22,8 +25,12 @@ The project combines responsive presentation pages with Firebase email/password 
   - Accommodation Experience with three room cards
   - Core Services, Environment & Facilities, and Brand Differentiation
   - Featured Room package and Testimonials
-- `/centres/jade-and-bloom/rooms`, `/centres/jade-and-bloom/packages`, `/centres/jade-and-bloom/care`
+- `/centres/jade-and-bloom/rooms`, `/centres/jade-and-bloom/packages`
   - Dedicated views reusing the Jade & Bloom page component
+- `/centres/jade-and-bloom/care`
+  - Dedicated care page with its own title/description metadata and a four-part hero: eyebrow, headline, location/programme details, and caregiver photo
+  - Six data-driven sections: Maternal Care, Newborn Care, Nourishing Cuisine, Personalised Wellness, Our Care Team, and Safety & Hygiene
+  - Shared section layout with alternating image placement and cream/sage backgrounds; images appear above text on smaller screens
 - `/centres/jade-and-bloom/faq`
   - Topic highlights, FAQ accordions, and an enquiry CTA using `mailto:`
 - `/faq`
@@ -43,6 +50,12 @@ The project combines responsive presentation pages with Firebase email/password 
 
 - Responsive navigation, footer, platform pages, and Jade & Bloom sections using local assets
 - Accommodation image hover effects, image carousels, FAQ accordions, and enquiry links
+- Platform home sections and partner-centre Polaroid carousel, using local images and responsive card layouts
+- Testimonial sphere with 25 photos, descriptive alt text, warm `#e8ddca` photo borders, soft shadows, and no filled circle behind the sphere
+- Sphere rotation pauses on hover, keyboard focus, or an open dialog; manual pause/resume and drag-to-rotate are available. `prefers-reduced-motion` stops automatic rotation, and the preference is observed live.
+- Accessible testimonial dialogs with native modal semantics, labelled Close buttons, Escape/backdrop dismissal, Tab/Shift+Tab focus containment, scroll locking, and focus restoration
+- Testimonial dialog photos use a square container up to 400px wide and `object-contain`, with surrounding space and scrollable content on smaller screens
+- Dedicated Jade & Bloom care page driven by `src/lib/care-data.ts`, reusing the shared cream/white/sage `Section` component and optimized local images
 - Firebase email/password registration, login, verification, logout, and Firestore user profiles
 - Registration flow: create account, update display name, create `users/{uid}`, and send verification email
 - Registration retains an in-memory session for direct resend; refresh discards it and returns to the registration form
@@ -80,13 +93,13 @@ The project combines responsive presentation pages with Firebase email/password 
 | Next.js 16.4.2 | App Router, rendering, local development, and production builds |
 | React 19.3.0 | UI components and hooks |
 | TypeScript | Typed application code and type checking |
-| Tailwind CSS 4 | Styling through `src/app/globals.css` and the Turbopack Tailwind loader |
+| Tailwind CSS 4 | Utility styling through `src/app/globals.css` and the Turbopack Tailwind loader; scoped testimonial styles in `src/components/ui/img-sphere.css` |
 | react-hook-form + @hookform/resolvers | Form state, field errors, and zod integration |
 | zod 4 | Form validation and shared password policy |
 | Firebase 12.18.x | Email/password Authentication, email verification, and Firestore profiles |
 | Motion | Password-strength animations and reduced-motion support |
 | Lucide React + React Icons | Interface icons |
-| Vitest + Testing Library + jsdom | Policy, authentication-service, dictionary, and hook tests |
+| Vitest + Testing Library + jsdom | Policy, authentication-service, dictionary, hook, and testimonial interaction tests |
 | ESLint + eslint-config-next | Code quality checks |
 | Node.js + npm | Runtime, dependency management, and project scripts |
 
@@ -95,9 +108,9 @@ Reusable UI components live in `src/components/ui`, resolved through `@/componen
 ## Prerequisites
 
 - Node.js
-  - This project was last checked with Node.js `v26.11.1`.
+  - Next.js 16.4.2 requires Node.js `>=20.9.0`; the current local runtime is `v24.22.1`.
 - npm
-  - This project was last checked with npm `11.20.0`.
+  - Use npm with the committed `package-lock.json`; install dependencies with `npm.cmd ci`.
 - Git
   - Recommended for version control and checking local changes.
 - Firebase web app configuration
@@ -146,7 +159,7 @@ Restart the dev server after changing environment variables or dependencies. To 
 
 The `test` script is configured; there is no separate `typecheck` script. Vitest configuration is in `vitest.config.mts` and supports the `@/` alias and per-file jsdom tests.
 
-The last implementation checks passed lint (with four existing image-optimization warnings), TypeScript, 45 tests, and the production build. Tests use mocked Firebase services; passing them does not verify real email delivery or live backend permissions. Manually check registration, email verification, resend/cooldown, login, logout, and home protection using a test account.
+The test suite covers password policy, authentication services, translations, verification polling, and testimonial interactions. The sphere has nine regression cases covering review content, browsing all stories, close methods, focus restoration, rotation pause behaviour, reduced motion, and keyboard focus containment. Tests use mocked Firebase/browser services; passing them does not verify real email delivery, live backend permissions, or the browser's native dialog behaviour. Run the lint, TypeScript, test, and production-build commands above for the current checkout. Manually check registration, email verification, resend/cooldown, login, logout, home protection, and testimonial photo selection/dialog controls on desktop and mobile.
 
 ## Project Structure
 
@@ -156,23 +169,29 @@ The last implementation checks passed lint (with four existing image-optimizatio
 | `src/app/page.tsx` | Protected Nurture Nest platform home |
 | `src/app/login/page.tsx`, `src/app/signup/page.tsx` | Authentication route entries |
 | `src/app/centres/` | Centre landing page and brand-specific routes |
-| `src/app/centres/jade-and-bloom/main/home-page.tsx` | Jade & Bloom main component, also reused by rooms, packages, and care routes |
+| `src/app/centres/jade-and-bloom/main/home-page.tsx` | Jade & Bloom main component, also reused by the rooms and packages routes |
+| `src/app/centres/jade-and-bloom/care/page.tsx` | Dedicated care hero, metadata, and six reusable care sections |
 | `src/app/layout.tsx` | Root metadata, fonts, authentication provider, and early theme script |
 | `src/app/globals.css` | Tailwind import, global styles, and authentication theme tokens |
-| `src/components/platform-page.tsx` | Nurture Nest platform presentation |
+| `src/components/platform-page.tsx` | Nurture Nest hero, information sections, partner carousel, and family testimonial section |
+| `src/components/section.tsx` | Shared section container with cream, white, and sage tones |
 | `src/components/auth-page.tsx` | Shared login/signup form and authentication layout |
 | `src/components/auth-provider.tsx`, `src/components/auth-guard.tsx` | Authentication state and reusable page protection |
 | `src/components/signup-verification.tsx` | Registration resend and congratulations UI |
 | `src/hooks/use-email-verification-watcher.ts` | Shared visibility-aware verification polling for signup and login |
 | `src/components/user-menu.tsx` | User name display and logout |
-| `src/components/ui/` | Reusable UI, including password strength and image effects |
+| `src/components/ui/` | Reusable UI, including password strength, curved hero images, and the Polaroid carousel |
+| `src/components/ui/img-sphere.tsx`, `src/components/ui/img-sphere.css` | Interactive photo sphere, accessible testimonial dialog, and scoped styles |
+| `src/lib/family-testimonials.ts` | The 25 local family stories, with photo, alt text, name, centre, rating, title, and description |
+| `src/lib/care-data.ts` | Jade & Bloom's six care categories, images, introductory titles, and care details |
 | `src/lib/firebase.ts` | Singleton Firebase app setup; exports `auth` and `db` |
 | `src/lib/auth-service.ts` | Firebase authentication and profile operations |
 | `src/lib/auth-dictionary.ts` | Authentication translations and verification-message formatting |
 | `src/lib/password-policy.ts` | Shared character counting, password validation, and strength scoring |
 | `src/lib/` | Additional centre, room, service, and FAQ content modules |
-| `src/**/*.test.ts`, `src/**/*.test.tsx` | Unit and hook regression tests |
+| `src/**/*.test.ts`, `src/**/*.test.tsx` | Unit, hook, and component interaction regression tests |
 | `public/` | Static assets served from the site root |
+| `public/images/nurtureNestHome/`, `public/images/jb_room_pack_care/` | Platform images and testimonial photos (`t01`–`t25`), plus the seven Jade & Bloom care images |
 | `.env.example` | Firebase variable names with empty values |
 | `next.config.ts` | Next.js configuration |
 | `tsconfig.json` | TypeScript configuration and `@/*` path alias to `src/*` |
@@ -182,7 +201,7 @@ The last implementation checks passed lint (with four existing image-optimizatio
 | `package-lock.json` | Locked dependency tree used by `npm.cmd ci` |
 | `.gitignore` | Files and folders excluded from Git |
 
-`src/components/home-page.tsx` was moved to the Jade & Bloom `main` folder. The four route imports use the new path; the move does not create a `/main` route or change existing URLs.
+`src/components/home-page.tsx` was moved to the Jade & Bloom `main` folder. The main, rooms, and packages routes import it from the new path; care now has its own page implementation. The move does not create a `/main` route or change existing URLs.
 
 ## Environment Variables & Security
 
@@ -230,6 +249,8 @@ If the project does not start or behaves unexpectedly, check these first:
 ## Notes
 
 - `next.config.ts` enables `cacheComponents`, `partialPrefetching`, `experimental.agentUpgrade: "security"`, and a Turbopack CSS rule for Tailwind.
+- Adjust the home sphere's `autoRotateSpeed` prop in `src/components/platform-page.tsx` to change its rotation speed. It is currently `10` degrees per second (about 36 seconds per full turn while running); the reusable component defaults to `4` when no value is passed.
+- Sphere photo sizing, borders, shadows, and square dialog photo sizing are controlled by `src/components/ui/img-sphere.css`. Family review content lives in `src/lib/family-testimonials.ts`; care content lives in `src/lib/care-data.ts`.
 - Follow `AGENTS.md`: read relevant documentation in `node_modules/next/dist/docs/` before changing Next.js code for this version.
 - Authentication appearance uses `data-auth-theme` and CSS variables, not a global Tailwind `.dark` class. Login/signup translations and night mode do not translate or restyle the platform/centre pages.
 - `AuthGuard` currently wraps `/`; centre pages are not automatically protected by it.
