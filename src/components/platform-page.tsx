@@ -11,6 +11,8 @@ import {
 import { SiteFooter, SiteNavigation } from "@/components/site-navigation";
 import PolaroidLineCarousel, { type Slide } from "@/components/ui/polaroid-line-carousel";
 import { TiltedGridHero, type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
+import SphereImageGrid from "@/components/ui/img-sphere";
+import { familyTestimonials } from "@/lib/family-testimonials";
 
 const heroImages: TiltedGridImage[] = [
   { src: "/images/curvedImageCarouselHero/cich1.webp", alt: "A mother and newborn sharing a quiet moment" },
@@ -166,7 +168,7 @@ export function PlatformPage({ directory = false }: { directory?: boolean }) {
   return (
     <main className="min-h-screen bg-[#fbf7ef] text-[#2d2a22]">
       <SiteNavigation />
-      <section className="px-5 pb-24 pt-32 sm:px-8 lg:px-10">
+      <section className={`px-5 pt-32 sm:px-8 lg:px-10 ${directory ? "pb-24" : ""}`}>
         <div className="mx-auto max-w-7xl">
           <TiltedGridHero
             images={heroImages}
@@ -195,6 +197,15 @@ export function PlatformPage({ directory = false }: { directory?: boolean }) {
           {!directory && <HomeInformationSections />}
         </div>
       </section>
+      {!directory && (
+        <section id="family-stories" className="scroll-mt-28 bg-[#ffffff] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeading eyebrow="Shared beginnings" title="Kind words from our families" />
+            {/* Rotation speed in degrees/second: 4 = slow, 8 = twice as fast, 12 = three times as fast. */}
+            <SphereImageGrid images={familyTestimonials} autoRotateSpeed={10} />
+          </div>
+        </section>
+      )}
       <SiteFooter />
     </main>
   );

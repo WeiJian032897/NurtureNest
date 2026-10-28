@@ -1,0 +1,51 @@
+.nn-sphere-root { color: #2f4431; }
+.nn-sphere-hint { margin: 1.5rem auto 0; max-width: 31rem; text-align: center; font-size: .9375rem; line-height: 1.8; color: #6e6658; }
+.nn-sphere-sphere { position: relative; isolation: isolate; width: 100%; max-width: 650px; aspect-ratio: 1; margin: 1rem auto 0; touch-action: pan-y; user-select: none; cursor: grab; }
+.nn-sphere-sphere:active { cursor: grabbing; }
+.nn-sphere-portrait { position: absolute; width: 13%; aspect-ratio: 1; border: 0; padding: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.nn-sphere-portraitFrame { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 50%; border: 1px solid #e8ddca; background: #e5e8dd; box-shadow: 0 4px 14px rgb(79 67 48 / 12%); transition: transform 220ms ease, box-shadow 220ms ease; }
+.nn-sphere-portrait:hover .nn-sphere-portraitFrame, .nn-sphere-portrait:focus-visible .nn-sphere-portraitFrame { transform: scale(1.12); box-shadow: 0 10px 28px #48533c2b; }
+.nn-sphere-photo { object-fit: cover; }
+.nn-sphere-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .75rem 1.75rem; margin-top: .75rem; }
+.nn-sphere-browse, .nn-sphere-pause { display: inline-flex; justify-content: center; align-items: center; gap: .6rem; min-height: 44px; border-radius: 999px; font-size: .8125rem; cursor: pointer; transition: background 180ms ease; }
+.nn-sphere-browse { padding: .7rem 1.3rem; border: 1px solid #becab4; background: #eef2e8; font-weight: 500; }
+.nn-sphere-browse:hover { background: #e1e8d9; }
+.nn-sphere-pause { padding: .5rem .75rem; color: #6e6658; }
+.nn-sphere-pause:hover { background: #eee9de; }
+.nn-sphere-root button:focus-visible, .nn-sphere-dialog button:focus-visible { outline: 2px solid #60745c; outline-offset: 5px; }
+.nn-sphere-root .nn-sphere-portrait:focus { outline: none; }
+.nn-sphere-root .nn-sphere-portrait:focus-visible { outline: 2px solid #a58a51; outline-offset: 5px; }
+.nn-sphere-dialog { position: fixed; inset: 0; margin: auto; width: min(640px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; overflow-y: auto; overscroll-behavior: contain; border: 1px solid #dce3d3; border-radius: 28px; background: #fbf7ef; color: #2f4431; box-shadow: 0 32px 100px #14241833; }
+.nn-sphere-dialog::backdrop { background: #20302480; backdrop-filter: blur(6px); }
+.nn-sphere-dialog[open] { animation: nn-sphere-story-in 220ms ease-out; }
+.nn-sphere-card { position: relative; padding-top: 32px; }
+.nn-sphere-storyPhoto { position: relative; width: min(400px, calc(100% - 88px)); aspect-ratio: 1; margin: 0 auto; overflow: hidden; border-radius: 16px; background: #eef2e8; }
+.nn-sphere-cardBody { padding: 32px 44px 24px; }
+.nn-sphere-close { position: absolute; z-index: 1; top: 16px; right: 16px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #d5ddcc; border-radius: 50%; background: #eef2e8; box-shadow: 0 2px 12px #2030241a; cursor: pointer; }
+.nn-sphere-close:hover { background: #dde6d4; }
+.nn-sphere-eyebrow { padding-right: 32px; font-size: 10px; font-weight: 600; letter-spacing: .24em; color: #64745d; }
+.nn-sphere-rating { display: flex; gap: 4px; margin-top: 26px; color: #a58a51; }
+.nn-sphere-title { margin-top: 20px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 400; line-height: 1.2; letter-spacing: -.025em; text-wrap: pretty; }
+.nn-sphere-quote { margin: 20px 0 0; font-size: 1rem; line-height: 1.85; color: #645e51; }
+.nn-sphere-person { display: flex; align-items: center; gap: 16px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #dedfce; }
+.nn-sphere-name { font-size: .9375rem; font-weight: 600; }
+.nn-sphere-centre { margin-top: 5px; font-size: .8125rem; line-height: 1.6; color: #6e6658; }
+.nn-sphere-dialogFooter { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 26px; padding-top: 18px; border-top: 1px solid #dedfce; }
+.nn-sphere-counter { font-size: .6875rem; letter-spacing: .12em; color: #777363; }
+.nn-sphere-arrows { display: flex; gap: 8px; }
+.nn-sphere-arrows button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #c9d3bd; cursor: pointer; }
+.nn-sphere-arrows button:hover { background: #eef2e8; }
+@keyframes nn-sphere-story-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 480px) {
+  .nn-sphere-hint { font-size: .8125rem; max-width: 20rem; }
+  .nn-sphere-card { padding-top: 72px; }
+  .nn-sphere-storyPhoto { width: calc(100% - 48px); max-width: 400px; }
+  .nn-sphere-cardBody { padding: 28px 24px 20px; }
+  .nn-sphere-quote { font-size: .9375rem; line-height: 1.75; }
+  .nn-sphere-person { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nn-sphere-dialog[open] { animation: none; }
+  .nn-sphere-portraitFrame, .nn-sphere-browse, .nn-sphere-pause { transition: none; }
+  .nn-sphere-portrait:hover .nn-sphere-portraitFrame, .nn-sphere-portrait:focus-visible .nn-sphere-portraitFrame { transform: none; }
+}
