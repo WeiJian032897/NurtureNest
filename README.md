@@ -25,16 +25,19 @@ The project combines responsive presentation pages, interactive family testimoni
   - Accommodation Experience with three room cards
   - Core Services, Environment & Facilities, and Brand Differentiation
   - Featured Room package and Testimonials
+- `/centres/jade-and-bloom/stay-and-packages` (Stay & Packages)
+  - Combined room and package page reusing the Jade & Bloom page component, with three room cards, accommodation comparison, and the featured 42-day package
+  - Navigation and footer use one Stay & Packages entry; package enquiries link to the FAQ enquiry section
 - `/centres/jade-and-bloom/rooms`, `/centres/jade-and-bloom/packages`
-  - Dedicated views reusing the Jade & Bloom page component
+  - Legacy links redirect to Stay & Packages; the packages link opens its featured-package section
 - `/centres/jade-and-bloom/care`
   - Dedicated care page with its own title/description metadata and a four-part hero: eyebrow, headline, location/programme details, and caregiver photo
   - Six data-driven sections: Maternal Care, Newborn Care, Nourishing Cuisine, Personalised Wellness, Our Care Team, and Safety & Hygiene
   - Shared section layout with alternating image placement and cream/sage backgrounds; images appear above text on smaller screens
 - `/centres/jade-and-bloom/faq`
-  - Topic highlights, FAQ accordions, and an enquiry CTA using `mailto:`
+  - Topic highlights, FAQ accordions, and an enquiry CTA opening Gmail compose in a new tab with recipient `cheeweijian2003@gmail.com`, subject `Jade & Bloom Enquiry`, and an editable enquiry template; visitors review and send the email themselves
 - `/faq`
-  - Redirects to `/centres/jade-and-bloom/faq`
+  - Compatibility entry that redirects old `/faq` links to `/centres/jade-and-bloom/faq`; the actual FAQ content lives in the centre route
 - `/login`
   - Email/password login, email-verification checks, and resend support
   - Verified users are redirected to `/`; missing Firestore user documents are repaired before completing login
@@ -169,7 +172,8 @@ The test suite covers password policy, authentication services, translations, ve
 | `src/app/page.tsx` | Protected Nurture Nest platform home |
 | `src/app/login/page.tsx`, `src/app/signup/page.tsx` | Authentication route entries |
 | `src/app/centres/` | Centre landing page and brand-specific routes |
-| `src/app/centres/jade-and-bloom/main/home-page.tsx` | Jade & Bloom main component, also reused by the rooms and packages routes |
+| `src/app/centres/jade-and-bloom/main/home-page.tsx` | Jade & Bloom main component, also reused by the combined Stay & Packages route |
+| `src/app/centres/jade-and-bloom/stay-and-packages/page.tsx` | Combined rooms/packages route and metadata; old rooms/packages routes redirect here |
 | `src/app/centres/jade-and-bloom/care/page.tsx` | Dedicated care hero, metadata, and six reusable care sections |
 | `src/app/layout.tsx` | Root metadata, fonts, authentication provider, and early theme script |
 | `src/app/globals.css` | Tailwind import, global styles, and authentication theme tokens |
@@ -201,7 +205,7 @@ The test suite covers password policy, authentication services, translations, ve
 | `package-lock.json` | Locked dependency tree used by `npm.cmd ci` |
 | `.gitignore` | Files and folders excluded from Git |
 
-`src/components/home-page.tsx` was moved to the Jade & Bloom `main` folder. The main, rooms, and packages routes import it from the new path; care now has its own page implementation. The move does not create a `/main` route or change existing URLs.
+`src/components/home-page.tsx` was moved to the Jade & Bloom `main` folder. The main and Stay & Packages routes import it from the new path; care has its own page implementation. Rooms and packages are combined at `/centres/jade-and-bloom/stay-and-packages`, with redirects for both old URLs. The `main` folder does not create a `/main` route.
 
 ## Environment Variables & Security
 

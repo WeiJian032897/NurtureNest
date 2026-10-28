@@ -1,5 +1,5 @@
-import { HomePage } from "@/app/centres/jade-and-bloom/main/home-page";
+import { redirect } from "next/navigation";
 
 export default function RoomsPage() {
-  return <HomePage section="rooms" />;
+  redirect("/centres/jade-and-bloom/stay-and-packages");
 }

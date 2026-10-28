@@ -25,7 +25,7 @@ const focusRing =
 export function HomePage({
   section = "all",
 }: {
-  section?: "all" | "rooms" | "packages" | "care";
+  section?: "all" | "stay-and-packages";
 }) {
   return (
     <main className="min-h-screen overflow-hidden bg-[#fbf7ef] text-[#2d2a22]">
@@ -42,11 +42,17 @@ export function HomePage({
           <TestimonialsSection />
         </>
       ) : (
-        <section className="min-h-screen pt-28">
-          {section === "rooms" && <AccommodationExperienceSection />}
-          {section === "packages" && <FeaturedRoomSection />}
-          {section === "care" && <CoreServicesSection />}
-        </section>
+        <>
+          <section aria-label="Stay and packages introduction" className="px-5 pt-56 pb-4 text-center sm:px-8 md:pt-52 lg:px-10 xl:pt-44">
+            <div className="mx-auto max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#60745c]">JADE & BLOOM · YOUR STAY</p>
+              <h1 className="mt-5 font-serif text-5xl leading-tight text-[#2f4431] sm:text-6xl">Stay &amp; Packages</h1>
+              <p className="mt-5 text-lg leading-8 text-[#6e6658]">Find your private sanctuary and explore a thoughtful 42-day stay for mother and baby.</p>
+            </div>
+          </section>
+          <AccommodationExperienceSection isStayPage />
+          <FeaturedRoomSection isStayPage />
+        </>
       )}
       <SiteFooter />
     </main>
@@ -69,14 +75,6 @@ function HeroSection() {
             From attentive newborn support to nourishing cuisine and peaceful lakeside moments, every detail is designed to help families
             embrace this new chapter with greater comfort, confidence and peace of mind.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/centres/jade-and-bloom/care" variant="primary">
-              Explore Our Care
-            </ButtonLink>
-            <ButtonLink href="/centres/jade-and-bloom/rooms" variant="secondary">
-              Enquire About Your Stay
-            </ButtonLink>
-          </div>
         </div>
 
         <div className="animate-fade relative">
@@ -124,7 +122,7 @@ function BrandPhilosophySection() {
   );
 }
 
-function AccommodationExperienceSection() {
+function AccommodationExperienceSection({ isStayPage = false }: { isStayPage?: boolean } = {}) {
   return (
     <Section id="rooms">
       <SectionIntro
@@ -234,11 +232,13 @@ function AccommodationExperienceSection() {
         </div>
       </div>
 
-      <div className="mt-10 flex justify-center">
-        <ButtonLink href="/centres/jade-and-bloom/rooms" variant="primary">
-          Explore Our Rooms
-        </ButtonLink>
-      </div>
+      {isStayPage && (
+        <div className="mt-10 flex justify-center">
+          <ButtonLink href="#featured-room" variant="primary">
+            View Our Featured Package
+          </ButtonLink>
+        </div>
+      )}
     </Section>
   );
 }
@@ -370,7 +370,7 @@ function BrandDifferentiationSection() {
   );
 }
 
-function FeaturedRoomSection() {
+function FeaturedRoomSection({ isStayPage = false }: { isStayPage?: boolean } = {}) {
   const featuredRoom = {
     eyebrow: "Our Featured Room In Setapak , Kuala Lumpur",
     name: "Deluxe Room",
@@ -378,7 +378,7 @@ function FeaturedRoomSection() {
     features: [
       "Refined, calming interiors",
       "A comfortable space where a new mother can relax, recover, and restore her vitality after childbirth.",
-      "Professional 24-hour infant care",
+      "24-hour infant care provided by professional medical staff working in shifts",
       "Thoughtful room layout for everyday family needs",
       "Includes a variety of nutritious breakfast, lunch, afternoon tea, and dinner options, thoughtfully designed for new mothers, baby, and their families.",
     ],
@@ -437,8 +437,8 @@ function FeaturedRoomSection() {
             </div>
 
             <div className="mt-8">
-              <ButtonLink href="/centres/jade-and-bloom/packages" variant="primary">
-                Explore Our Packages
+              <ButtonLink href={isStayPage ? "/centres/jade-and-bloom/faq#enquiry" : "/centres/jade-and-bloom/stay-and-packages#featured-room"} variant="primary">
+                {isStayPage ? "Enquire About Your Stay" : "Explore Our Packages"}
               </ButtonLink>
             </div>
           </div>

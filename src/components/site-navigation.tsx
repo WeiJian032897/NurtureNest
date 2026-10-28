@@ -109,7 +109,7 @@ export function SiteNavigation() {
         {pathname === "/" && <UserMenu />}
         {isCentrePage && (
           <a
-            href={`${getCentreNavItems(activeCentre!.href)[4].href}#enquiry`}
+            href={`${activeCentre!.href}/faq#enquiry`}
             className={`order-2 justify-self-end rounded-full border border-[#2f4431] bg-[#2f4431] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#253827] sm:px-6 sm:py-3 sm:text-base xl:order-none ${focusRing}`}
           >
             Enquire

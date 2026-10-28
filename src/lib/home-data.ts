@@ -1,8 +1,7 @@
 export function getCentreNavItems(basePath: string) {
   return [
     { label: "Main", href: basePath },
-    { label: "Rooms", href: `${basePath}/rooms` },
-    { label: "Packages", href: `${basePath}/packages` },
+    { label: "Stay & Packages", href: `${basePath}/stay-and-packages` },
     { label: "Care", href: `${basePath}/care` },
     { label: "FAQ", href: `${basePath}/faq` },
   ];

@@ -18,6 +18,24 @@ export const metadata: Metadata = {
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
 
+const gmailEnquiryUrl = `https://mail.google.com/mail/?${new URLSearchParams({
+  view: "cm",
+  fs: "1",
+  to: "cheeweijian2003@gmail.com",
+  su: "Jade & Bloom Enquiry",
+  body: [
+    "Hello Jade & Bloom,",
+    "",
+    "I would like to enquire about your rooms, packages and availability.",
+    "",
+    "Expected delivery date:",
+    "Preferred stay dates:",
+    "Questions:",
+    "",
+    "Thank you.",
+  ].join("\n"),
+}).toString()}`;
+
 const topics = [
   {
     icon: CalendarCheck,
@@ -171,7 +189,9 @@ export default function FaqPage() {
             anything else — our team will be happy to assist.
           </p>
           <a
-            href="mailto:cheeweijian2003@gmail.com?subject=Jade%20&%20Bloom%20enquiry"
+            href={gmailEnquiryUrl}
+            target="_blank"
+            rel="noreferrer"
             className={`mt-8 inline-flex h-12 items-center justify-center rounded-full bg-[#fbf7ef] px-7 text-sm font-semibold text-[#2f4431] transition hover:-translate-y-0.5 hover:bg-white ${focusRing}`}
           >
             Contact Jade & Bloom
