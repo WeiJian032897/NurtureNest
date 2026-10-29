@@ -10,18 +10,18 @@ export const faqs: FaqItem[] = [
     questionEn: "What is Jade & Bloom?",
     questionCn: "Jade & Bloom 是什么？",
     answerEn:
-      "Jade & Bloom is a premium postnatal care and wellness centre in Kuala Lumpur, thoughtfully designed to support mothers through recovery while providing attentive newborn care. With refined accommodation, personalised services and a tranquil lakeside setting, we create a nurturing environment for the entire family.",
+      "Jade & Bloom is a premium postnatal care and wellness centre in Setapak Kuala Lumpur, thoughtfully designed to support mothers through recovery while providing attentive newborn care. With refined accommodation, personalised services and a tranquil lakeside setting, we create a nurturing environment for the entire family.",
     answerCn:
-      "Jade & Bloom 是一家位于吉隆坡的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验。",
+      "Jade & Bloom 是一家位于吉隆坡文良港（Setapak）的高端产后护理与康养中心，致力于陪伴妈妈安心恢复，并为新生儿提供细致照护。我们融合精致住宿、个性化服务与宁静的湖畔环境，为整个家庭打造温馨舒适的休养体验。",
   },
   {
     questionEn:
       "How long is the standard stay, and what room options are available?",
     questionCn: "标准入住时间是多久？有哪些房型可选？",
     answerEn:
-      "Our signature programme offers a 42-day stay, with a selection of room categories to suit different preferences and budgets. Every room is designed around comfort, privacy and attentive care, with consistent service standards across all categories.",
+      "Our programme commonly offers a 42-day stay, with a selection of room categories and service packages to suit different preferences and budgets. Every room is designed around comfort, privacy and attentive care, with consistent service standards across all categories.",
     answerCn:
-      "我们的招牌配套为期 42 天，并提供不同等级的房型，以满足不同的偏好与预算。每间客房均以舒适、私密与贴心照护为设计核心，所有房型皆遵循一致的服务标准。",
+      "我们的项目一般为期 42 天，并提供不同等级的房型与服务配套，以满足不同的偏好与预算。每间客房均以舒适、私密与贴心照护为设计核心，所有房型皆遵循一致的服务标准。",
   },
   {
     questionEn:
@@ -80,9 +80,9 @@ export const faqs: FaqItem[] = [
     questionEn: "How can I reserve a room, and when should I book?",
     questionCn: "如何预订房间？应该什么时候预订？",
     answerEn:
-      "You can submit an enquiry through our website or contact our team via WhatsApp. We recommend enquiring during pregnancy to explore room categories, package details and availability around your expected delivery date. All reservations are subject to confirmation.",
+      "You can submit a booking via our  Stay & Packages page, or get in touch with our team via WhatsApp.We recommend enquiring during pregnancy to explore room categories, package details and availability around your expected delivery date. All reservations are subject to confirmation.",
     answerCn:
-      "您可以通过官网提交咨询表格，或经 WhatsApp 联系我们的团队。我们建议您在怀孕期间提前咨询，以了解房型、配套详情及预产期附近的房间供应情况。所有预订均须经中心确认。",
+      "您可以通过我们的stay & packages 页面提交预订,或通过 WhatsApp 与我们的团队联系。我们建议您在怀孕期间提前咨询，以了解房型、配套详情及预产期附近的房间供应情况。所有预订均须经中心确认。",
   },
   {
     questionEn: "How much does a 42-day stay cost, and what is included?",

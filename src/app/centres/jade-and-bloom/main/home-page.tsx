@@ -4,7 +4,6 @@ import {
   HeartPulse,
   Moon,
 } from "lucide-react";
-import type { ReactNode } from "react";
 import {
   accommodationComparison,
   brandDifferentiation,
@@ -19,41 +18,17 @@ import { Section } from "@/components/section";
 
 const philosophyIcons = [Moon, Baby, HeartPulse];
 
-const focusRing =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6f866b]";
-
-export function HomePage({
-  section = "all",
-}: {
-  section?: "all" | "stay-and-packages";
-}) {
+export function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#fbf7ef] text-[#2d2a22]">
       <SiteNavigation />
-      {section === "all" ? (
-        <>
-          <HeroSection />
-          <BrandPhilosophySection />
-          <AccommodationExperienceSection />
-          <CoreServicesSection />
-          <EnvironmentFacilitiesSection />
-          <BrandDifferentiationSection />
-          <FeaturedRoomSection />
-          <TestimonialsSection />
-        </>
-      ) : (
-        <>
-          <section aria-label="Stay and packages introduction" className="px-5 pt-56 pb-4 text-center sm:px-8 md:pt-52 lg:px-10 xl:pt-44">
-            <div className="mx-auto max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#60745c]">JADE & BLOOM · YOUR STAY</p>
-              <h1 className="mt-5 font-serif text-5xl leading-tight text-[#2f4431] sm:text-6xl">Stay &amp; Packages</h1>
-              <p className="mt-5 text-lg leading-8 text-[#6e6658]">Find your private sanctuary and explore a thoughtful 42-day stay for mother and baby.</p>
-            </div>
-          </section>
-          <AccommodationExperienceSection isStayPage />
-          <FeaturedRoomSection isStayPage />
-        </>
-      )}
+      <HeroSection />
+      <BrandPhilosophySection />
+      <AccommodationExperienceSection />
+      <CoreServicesSection />
+      <EnvironmentFacilitiesSection />
+      <BrandDifferentiationSection />
+      <TestimonialsSection />
       <SiteFooter />
     </main>
   );
@@ -122,7 +97,7 @@ function BrandPhilosophySection() {
   );
 }
 
-function AccommodationExperienceSection({ isStayPage = false }: { isStayPage?: boolean } = {}) {
+function AccommodationExperienceSection() {
   return (
     <Section id="rooms">
       <SectionIntro
@@ -131,7 +106,7 @@ function AccommodationExperienceSection({ isStayPage = false }: { isStayPage?: b
         text="Designed for comfort, privacy and peaceful moments, our thoughtfully appointed rooms offer a welcoming retreat for mothers and their little ones. From restful interiors to considered everyday essentials, every space is envisioned to make the first 42 days feel a little more comfortable."
       />
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-3">
+      <div className="mt-12 grid gap-8 lg:grid-cols-2">
         {rooms.map((room) => (
           <article
             key={room.name}
@@ -232,13 +207,6 @@ function AccommodationExperienceSection({ isStayPage = false }: { isStayPage?: b
         </div>
       </div>
 
-      {isStayPage && (
-        <div className="mt-10 flex justify-center">
-          <ButtonLink href="#featured-room" variant="primary">
-            View Our Featured Package
-          </ButtonLink>
-        </div>
-      )}
     </Section>
   );
 }
@@ -370,84 +338,6 @@ function BrandDifferentiationSection() {
   );
 }
 
-function FeaturedRoomSection({ isStayPage = false }: { isStayPage?: boolean } = {}) {
-  const featuredRoom = {
-    eyebrow: "Our Featured Room In Setapak , Kuala Lumpur",
-    name: "Deluxe Room",
-    tagline: "A beautiful balance of comfort and practicality.",
-    features: [
-      "Refined, calming interiors",
-      "A comfortable space where a new mother can relax, recover, and restore her vitality after childbirth.",
-      "24-hour infant care provided by professional medical staff working in shifts",
-      "Thoughtful room layout for everyday family needs",
-      "Includes a variety of nutritious breakfast, lunch, afternoon tea, and dinner options, thoughtfully designed for new mothers, baby, and their families.",
-    ],
-    price: "RM 49,999",
-    priceNote: "tax included",
-    duration: "42 days in total",
-    image: "/images/jadeBloomHome/jb-featured-room.jpg",
-  };
-
-  return (
-    <Section id="featured-room" tone="cream">
-      <SectionIntro
-        eyebrow="Best Selling Room Package"
-        title="Your Most Welcoming Beginning"
-        text="A refined and welcoming private space designed around the comfort of mothers, the needs of newborns and the little moments that make a family feel at home."
-      />
-
-      <div className="mt-12 overflow-hidden rounded-3xl border border-[#e8ddca] bg-white shadow-2xl shadow-[#b9aa8f]/25">
-        <div className="grid lg:grid-cols-2">
-          <div className="relative min-h-[22rem] lg:min-h-[40rem]">
-            <SurfaceImage
-              label={`${featuredRoom.name} featured room`}
-              image={featuredRoom.image}
-              className="h-full min-h-[22rem] lg:min-h-[40rem]"
-              frameClassName="rounded-none border-0 p-0 shadow-none"
-            />
-          </div>
-
-          <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#7f967a]">
-              {featuredRoom.eyebrow}
-            </p>
-            <h3 className="mt-4 font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">
-              {featuredRoom.name}
-            </h3>
-            <p className="mt-4 text-lg leading-8 text-[#6e6658]">
-              {featuredRoom.tagline}
-            </p>
-
-            <ul className="mt-8 space-y-4">
-              {featuredRoom.features.map((feature) => (
-                <li key={feature} className="flex gap-3 text-sm leading-7 text-[#5f5749]">
-                  <Check className="mt-1 size-4 shrink-0 text-[#6f866b]" aria-hidden="true" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 flex flex-col gap-1 border-t border-[#e8ddca] pt-6 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="font-serif text-3xl text-[#2f4431]">{featuredRoom.price}</p>
-                <p className="mt-1 text-sm text-[#6e6658]">
-                  {featuredRoom.priceNote} · {featuredRoom.duration}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <ButtonLink href={isStayPage ? "/centres/jade-and-bloom/faq#enquiry" : "/centres/jade-and-bloom/stay-and-packages#featured-room"} variant="primary">
-                {isStayPage ? "Enquire About Your Stay" : "Explore Our Packages"}
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
 function TestimonialsSection() {
   return (
     <Section id="testimonials" tone="white">
@@ -479,30 +369,6 @@ function SectionIntro({
       <h2 className="font-serif text-4xl leading-tight text-[#28251f] sm:text-5xl">{title}</h2>
       <p className="mt-5 text-lg leading-8 text-[#6e6658]">{text}</p>
     </div>
-  );
-}
-
-function ButtonLink({
-  href,
-  variant,
-  children,
-}: {
-  href: string;
-  variant: "primary" | "secondary";
-  children: ReactNode;
-}) {
-  const className =
-    variant === "primary"
-      ? "bg-[#2f4431] text-white shadow-lg shadow-[#6d7f68]/20 hover:bg-[#253827]"
-      : "border border-[#c8b99f] text-[#3f3a30] hover:border-[#8fa88b] hover:bg-white/60";
-
-  return (
-    <a
-      href={href}
-      className={`inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-semibold transition hover:-translate-y-0.5 ${className} ${focusRing}`}
-    >
-      {children}
-    </a>
   );
 }
 

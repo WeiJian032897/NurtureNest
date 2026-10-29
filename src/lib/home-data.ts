@@ -24,14 +24,14 @@ export const brandPhilosophy = [
 
 export const rooms = [
   {
-    name: "Deluxe Room",
-    image: "/images/jadeBloomHome/serene-suite.jpg",
+    name: "Standard Room",
+    image: "/images/jadeBloomHome/standardRoom.jpg",
     eyebrow: "Comfortable & Practical",
     tag: "Entry-Level Room",
     description:
       "Offering a refined, practical private space for families who value comfort and a quiet environment.",
     features: [
-      "Comfortable large bed with bedside lighting",
+      "Comfortable large double bed with bedside lighting",
       "Chair for nursing or feeding",
       "Private bathroom",
       "Wardrobe, luggage storage, and storage space for baby essentials",
@@ -41,38 +41,21 @@ export const rooms = [
       "Minimalist, warm, and practical. A complete, comfortable experience—even in the entry-level room category.",
   },
   {
-    name: "Premier Room",
-    image: "/images/jadeBloomHome/PremierRoom.jpg",
+    name: "Deluxe Room",
+    image: "/images/jadeBloomHome/deluxeRoom.jpg",
     eyebrow: "More Space and Comfort",
     tag: "Elevated Experience",
     description:
-      "Designed for families seeking greater spaciousness, a comfortable relaxation area, and enhanced privacy.",
+      "An upgraded version of the standard room. Designed for families seeking greater spaciousness, a comfortable relaxation area, and enhanced privacy.",
     features: [
-      "More spacious sleeping and activity areas",
-      "A separate or semi-separate relaxation nook",
-      "Ample storage and shelving space",
-      "Seating to accommodate two companions",
+      "A more spacious area for sleeping featuring one large double bed and one large single bed.",
+      "A separate relaxation living room for activities such as reading, feeding, or simply enjoying a quiet moment.",
+      "Comprehensive ample storage and shelving space",
+      "Seating to accommodate three companions besides baby with a focus on comfort and privacy",
       "Superior natural light, views, or spatial layout for a calmer atmosphere",
     ],
     designConcept:
       "Evoking the feel of a boutique hotel suite, with the added value reflected in tangible space or amenities.",
-  },
-  {
-    name: "Signature Suite",
-    image: "/images/jadeBloomHome/signatureSuite.jpg",
-    eyebrow: "Spacious & Private",
-    tag: "Premium Accommodation",
-    description:
-      "A more spacious suite designed for families who value personal space, the presence of a partner, and a comprehensive living experience.",
-    features: [
-      "Larger living area",
-      "Separate living room or clearly defined relaxation zone",
-      "Layout conducive to extended stays with partners",
-      "Ample space for baby care and storage",
-      "Separate dining area or enhanced views",
-    ],
-    designConcept:
-      "Quiet, private, and refined. The focus is on adapting the space to family life rather than simply pursuing lavish décor.",
   },
 ];
 
