@@ -33,7 +33,7 @@ export const careSections: CareSectionContent[] = [
       { title: "Feeding, your way", text: "Breastfeed, or choose from our range of quality formulas to prepare yourself. At night, our team can feed your baby on your behalf or gently remind you when the baby needs a feed." },
       { title: "Family welcome", text: "Fathers and approved family members may visit, up to two additional guests with the mother. To protect hygiene and your baby’s development, only three families are admitted at a time. You may also view through the glass window or by video." },
       { title: "Baby records", text: "Feeding, weight and sleep are recorded weekly, and you’re welcome to review them on request." },
-      { title: "Prefer baby by your side?", text: "Rooming-in is available. We’ll provide a cot and the facilities you need." },
+      { title: "Prefer baby by your side?", text: "Rooming-in is available in our premium package. We’ll provide a cot and the facilities you need." },
     ],
   },
   {
